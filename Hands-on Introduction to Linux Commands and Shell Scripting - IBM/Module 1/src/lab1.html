@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Hands-on Lab: Getting Started with the Linux Terminal&quot;}
+
+&lt;p&gt;
+    &lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/p&gt;
+
+Estimated time needed: **15** minutes
+
+## Learning Objectives
+
+After completing this lab, you will be able to:
+
+- Interact with the Linux terminal
+- Browse directories on a Linux filesystem using the &#x60;ls&#x60; command
+- Navigate directories using the &#x60;cd&#x60; command
+- Save time and effort by using tab completion and your command history
+
+
+## About Skills Network Cloud IDE
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands-on labs for course and project-related labs. Theia is an open source Integrated Development Environment (IDE) that can be run on the desktop or on the cloud. To complete this lab, you will be using the Cloud IDE based on Theia.
+
+## Important Notice About This Lab Environment
+
+Please be aware that sessions for this lab environment are not persistent. Thus, every time you connect to this lab, a new environment is created for you, and any data or files you may have saved in a previous session will be lost. To avoid losing your data, plan to complete these labs in a single session.
+
+::page{title&#x3D;&quot;&quot;}
+
+## Opening a terminal
+
+When you first connect to the lab environment, there may already be an open terminal for you to use. If not, open a new terminal by clicking the menu bar and selecting **Terminal &gt; New Terminal**.
+
+![Terminal menu highlights New Terminal](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/newterminal.png)
+
+This will open a new terminal at the bottom of the screen.
+
+![New terminal window](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/terminal.png)
+
+In your newly opened terminal, you will run the commands provided in the following exercises. You can copy the code to your clipboard by clicking the copy button on the bottom right of each codeblock, then pasting it to the command line. However, it will be more beneficial to type the code yourself, so you can start building some \&quot;command muscle memory\&quot;.
+
+::page{title&#x3D;&quot;Exercise 1 - Browsing Directories&quot;}
+
+**&#x60;ls&#x60;**
+
+In this exercise, you will learn how to browse the content of directories using the &#x60;ls&#x60; command.
+
+&#x60;ls&#x60; is a special command that the shell interprets and runs as a program.
+
+### 1.1. Viewing files in the current working directory
+
+Typing and entering &#x60;ls&#x60; will display all files and directories contained within your current working directory:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+Your default current working directory in this lab environment, the &#x60;/home/project&#x60; directory, is empty. Thus entering &#x60;ls&#x60; into the command line will not return anything yet.
+
+### 1.2. Viewing files and directories within any directory
+
+If you know the path to a directory, you can view its contents by passing the path name as a *command line argument* to the &#x60;ls&#x60; command as follows:
+
+&#x60;ls [PATH TO DIRECTORY]&#x60;
+
+For example:
+
+&#x60;&#x60;&#x60;
+ls /
+&#x60;&#x60;&#x60;
+
+will show the contents of \&#x27;slash\&#x27;, your Linux system\&#x27;s root directory.
+
+Recall some of the standard subdirectories of \&#x27;slash\&#x27; that you\&#x27;ve learned about previously:
+
+| Directory | Contains                                 |
+| --------- | ---------------------------------------- |
+| &#x60;/bin&#x60;    | System commands, also called *binaries*  |
+| &#x60;/sbin&#x60;   | System administration binaries           |
+| &#x60;/usr&#x60;    | User programs and data                   |
+| &#x60;/home&#x60;   | Home directory                           |
+| &#x60;/media&#x60;  | Removable media device directories       |
+
+For example, entering the following command: 
+
+&#x60;&#x60;&#x60;
+ls /bin
+&#x60;&#x60;&#x60;
+
+will display the contents of the &#x60;/bin&#x60; directory.
+
+Notice that one of the files in the &#x60;/bin&#x60; directory is called \&quot;&#x60;ls&#x60;\&quot;. Indeed, when you enter the &#x60;ls&#x60; command, Linux searches for and runs the &#x60;ls&#x60; command by executing the binary file &#x60;/bin/ls&#x60;.
+
+::page{title&#x3D;&quot;Exercise 2 - Navigating Directories&quot;}
+
+**&#x60;cd&#x60;**
+
+In this exercise, you will explore directories using the &#x60;cd&#x60; command.
+
+Recall the symbols used to navigate to special paths:
+
+| Symbol | Stands for path to |
+| ------ | ------------------ |
+| &#x60;~&#x60;    | Home directory     |
+|  &#x60;/&#x60;   | Root directory     |
+|  &#x60;.&#x60;   | Current directory  |
+|  &#x60;..&#x60;  | Parent directory   |
+
+### 2.1. Changing your present working directory to your home directory
+
+To change your current working directory to your default home directory, use the &#x60;~&#x60; symbol as follows:
+
+&#x60;&#x60;&#x60;
+cd ~
+&#x60;&#x60;&#x60;
+
+Note that your lab environment\&#x27;s default home directory, &#x60;~&#x60;, is &#x60;/home/theia&#x60;. After changing directories to &#x60;~&#x60;, you can check this yourself by entering the &#x60;pwd&#x60; command, which displays the path to your current working directory.
+
+### 2.2. Changing your present working directory to its parent directory
+
+To change your current working directory to the *parent* directory of your present working directory, enter the following command using &#x60;..&#x60;:
+
+&#x60;&#x60;&#x60;
+cd ..
+&#x60;&#x60;&#x60;
+
+For example, if your working directory was &#x60;/home/theia&#x60;, then the new working directory will be &#x60;/home&#x60;.
+
+### 2.3. Changing working directory to root directory
+
+To change your current working directory to the root directory, use the following command with the &#x60;/&#x60; key:
+
+&#x60;&#x60;&#x60;
+cd /
+&#x60;&#x60;&#x60;
+
+### 2.4. Changing your present working directory to a child directory
+
+Assuming you are still in your root directory, use the following command to change your present working directory to the &#x60;/bin&#x60; directory:
+
+&#x60;&#x60;&#x60;
+cd bin
+&#x60;&#x60;&#x60;
+
+The &#x60;/bin&#x60; directory is called a *child* of the root directory, &#x60;/&#x60;, because it\&#x27;s a subdirectory within it.
+
+The &#x60;cd&#x60; command understands implicitly that &#x60;bin&#x60; is the name of a subdirectory of your current working directory. As a result, it deduces that its path is a combination of the current working directory path (&#x60;/&#x60;) and the subdirectory name (&#x60;bin&#x60;).
+
+Another method to change directories is to enter the command &#x60;cd ./bin&#x60;. In this case, &#x60;.&#x60; represents the path to your current working directory.
+
+Give it a try by entering &#x60;cd ./bin&#x60; in your command line! What directory did you end up in?
+
+&gt;**Tip:** If &#x60;cd ./bin&#x60; doesn\&#x27;t take you to the &#x60;/bin&#x60; directory, double-check what directory you are currently in. Remember, &#x60;.&#x60; represents the directory you are in. If you\&#x27;re already in &#x60;/bin&#x60;, the terminal will attempt to direct you to &#x60;/bin/bin&#x60;.
+
+### 2.5. Changing from your working directory back to your home directory
+
+There are multiple ways to change your current working directory back to your default home directory. One way is to return to your parent directory, &#x60;..&#x60;, and type the address of your home directory &#x60;/home/theia&#x60;:
+
+&#x60;&#x60;&#x60;
+cd ../home/theia
+&#x60;&#x60;&#x60;
+
+A simpler way to do this would be to use the &#x60;~&#x60; symbol to quickly and directly navigate to your home directory:
+
+&#x60;&#x60;&#x60;
+cd ~
+&#x60;&#x60;&#x60;
+
+Both methods will change your working directory back to your home directory.
+
+### 2.6. Changing from your working directory to your &#x60;project&#x60; directory
+
+Directories that are contained within the same parent directory are called **siblings**.
+
+In this environment, we have provided a special empty &#x60;project&#x60; directory for your work. This &#x60;project&#x60; directory is located at &#x60;/home/project&#x60; and is a sibling directory to &#x60;/home/theia&#x60;.
+
+Change your current working directory to its sibling directory, your &#x60;project&#x60; directory, by entering the following command:
+
+&#x60;&#x60;&#x60;
+cd ../project
+&#x60;&#x60;&#x60;
+
+
+::page{title&#x3D;&quot;Exercise 3 - Using tab completion and the command history&quot;}
+
+In this exercise, you will gain familiarity with tab completion and the command history.
+
+### 3.1. Scrolling through your command history
+
+At the command prompt, simply hit the &#x60;Up Arrow&#x60; and &#x60;Down Arrow&#x60; keys, &amp;#8593; and &amp;#8595;, to scroll through your command history.
+
+Assuming you are still in the same session as you were when you completed the previous exercises in this lab, you should see exactly what commands you have entered so far.
+
+For example, suppose you want to use the &#x60;cd&#x60; command to navigate to &#x60;/bin&#x60; again. Rather than retyping the command, simply press the &#x60;Up Arrow&#x60; key until you see the &#x60;cd bin&#x60; displayed at the command prompt and press &#x60;Enter&#x60;.
+
+Of course, this command will only work as expected if your current working directory is the correct one. If the command fails, you can keep scrolling through your history until you find the &#x60;cd&#x60; command to return to your root directory, (&#x60;cd /&#x60;). Enter that command first, then use the &#x60;Up Arrow&#x60; key to find and enter the &#x60;cd bin&#x60; command from your history.
+
+Your command history is very useful if you are doing repetitive tasks and want to avoid retyping things repeatedly.
+
+
+### 3.2. Using tab completion
+
+Tab completion can save you a lot of typing, thinking, and time. Let\&#x27;s take a look at some examples.
+
+Type &#x60;cd /bi&#x60; and press the &#x60;Tab&#x60; key. As you might expect, the command autocompletes to &#x60;cd /bin&#x60;. But what happens if you just type &#x60;cd /b&#x60; and press &#x60;Tab&#x60;?
+
+In this case, nothing happens. But if you hit &#x60;Tab&#x60; a second time, you\&#x27;ll see a list of all the valid candidates for autocompletion, namely &#x60;bin/&#x60; and &#x60;boot/&#x60;.
+
+Notice that &#x60;cd /b&#x60; reappears in the command prompt. You cannot use tab completion while there are multiple valid candidates for autocompletion. To narrow down your choices, add an &#x60;i&#x60; at the end of your line, then press &#x60;Tab&#x60; again. This time the prompt will fill with &#x60;cd /bin&#x60;, the only valid option remaining.
+
+&gt;**Tip:** Tab completion only works when there is **one** valid candidate for autocompletion. When there are multiple possible options, the command prompt will prompt you to enter more letters until there is only one possible option.
+
+You can even use tab completion repeatedly to \&quot;dig into\&quot; a directory tree.
+
+Let\&#x27;s say you have used tab completion to get to the point where &#x60;ls /home&#x60; is displayed at the command prompt. You can press &#x60;Tab&#x60; twice to get a listing of all the directories under &#x60;/home&#x60;. As you did with &#x60;cd /bin&#x60;, use tab completion to complete the address of a subdirectory such as &#x60;ls /home/theia&#x60;. You can repeat this process as many times as you like until you reach the end of a chosen path.
+
+As an exercise, practice using tab completion repeatedly to build up the command &#x60;ls /home/theia/dsdriver/bin&#x60;.
+
+Future labs will cover command options more in-depth. In this lab, you became familiar with the terminal environment and some basic commands.
+
+::page{title&#x3D;&quot;Practice Exercises&quot;}
+
+
+
+##### 1. List the contents of the root directory.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;ls&#x60; command with the correct argument.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+ls /
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 2. Change directories to your default home directory.
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;cd&#x60; command, and recall the special character that represents the path to your default home directory.
+
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cd ~
+&#x60;&#x60;&#x60;
+&gt; **Note:** Your home directory in this environment is &#x60;/home/theia&#x60;. The default home directory in Linux is &#x60;/home/{username}&#x60;, where &#x60;username&#x60; is the name you would have been assigned had you created a personal Linux user account.
+
+&lt;/details&gt;
+
+##### 3. Verify your current working directory is &#x60;/home/theia&#x60;.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Recall the command for displaying your present working directory.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+pwd
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 4. Use tab completion to change directories to &#x60;/bin&#x60;.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint 1&lt;/summary&gt;
+
+&gt; Use the &#x60;cd&#x60; command and start by typing &#x60;/b&#x60;. 
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint 2&lt;/summary&gt;
+
+&gt; You may have to press &#x60;Tab&#x60; more than once.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+	
+&gt; Because there are two directories in &#x60;/&#x60; that have names starting with a &#x60;b&#x60;, you need to press &#x60;Tab&#x60; twice. Then the terminal displays the two available options: &#x60;bin/&#x60; and &#x60;boot/&#x60;. To disambiguate, enter an &#x60;i&#x60; and press the &#x60;Tab&#x60; key.
+
+&lt;/details&gt;
+
+##### 5. Use your terminal\&#x27;s command history to change directories back to your home directory.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt;Use the arrow keys to scroll through your command history until you find the right command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt;Use the &#x60;Up Arrow&#x60; key until you find
+
+&#x60;&#x60;&#x60;
+cd ~
+&#x60;&#x60;&#x60;
+&gt;and press the &#x60;Enter&#x60; key.
+
+&lt;/details&gt;
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+Congratulations! You\&#x27;ve just completed your first hands-on experience with the Linux terminal!
+
+By now, you are getting a taste of just how powerful and fun the command line is. Now that you are up and running with the command line, we have a lot more exciting things for you to explore. We hope that you are as enthusiastic about learning Linux as we are!
+
+Some of the key skills you practiced in this lab include:
+
+- Interacting with the Linux terminal in a modern, cloud-based dev environment
+- Using the &#x60;ls&#x60; and &#x60;cd&#x60; commands to browse and navigate and explore directories on your Linux system
+- Making use of tab completion and your command history to save yourself time and effort
+
+If you ever feel like you might have missed anything important or just want some extra practice, you can always come back and go through this lab again. As always, we encourage you to explore to your heart\&#x27;s content. 
+
+
+
+## Authors
+
+Jeff Grossman
+Sam Prokopchuk
+
+### Other Contributors
+
+Rav Ahuja
+&lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description            |
+| ----------------- | ------- | ----------------- | ----------------------------- |
+| 2023-05-05        | 3.0     | Jeff Grossman     | Add practice exercises        |
+| 2023-04-04        | 2.3     | Steve Hord        | QA pass post-review           |
+| 2023-03-25        | 2.2     | Nick Yi           | ID review                     |
+| 2023-03-14        | 2.1     | Steve Hord        | QA pass with edits            |
+| 2022-12-28        | 2.0     | Jeff Grossman     | Split lab and add new content |
+| 2022-04-05        | 1.0     | Sam Prokopchuk    | Add first iteration of lab    |
+ Copyright (c) 2022-23 IBM Corporation. All rights reserved.
+--&gt;
+
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-5630-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:45:06Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_new_content%2Flabs%2FM1_Lab_Getting_Started_with_Linux_in_the_Cloud.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

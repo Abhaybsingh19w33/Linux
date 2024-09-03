@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt;
+
+# Linux Terminal Tips - Tab completion, command history
+
+## Learning Objectives
+After completing this reading, you will be able to:
+- Use tab completion to autocomplete commands
+- Use command history to quickly navigate previous commands
+
+## Tab Completion
+
+Many shells support a feature called **tab completion**.
+
+Tab completion allows you to autocomplete a command you\&#x27;re typing on the command line.
+
+Suppose you\&#x27;re in your home directory &#x60;~&#x60;, which contains the directories:
+ - &#x60;Pictures&#x60;
+ - &#x60;Videos&#x60;
+ - &#x60;Documents&#x60;
+ - &#x60;Downloads&#x60;
+
+And suppose your &#x60;Documents&#x60; folder _only_ contains the folder:
+ - &#x60;python-examples&#x60;
+
+### Tab completion:
+
+In this exercise, you will use tab completion to quickly enter a command to navigate to the &#x60;Pictures&#x60; directory.
+
+If you type:
+
+&#x60;&#x60;&#x60;
+~ $ cd P
+&#x60;&#x60;&#x60;
+
+and press &#x60;Tab&#x60;, the shell will autocomplete the command to:
+
+&#x60;&#x60;&#x60;
+~ $ cd Pictures/
+&#x60;&#x60;&#x60;
+
+because the &#x60;Pictures&#x60; directory is the only directory within your current folder that starts with a \&quot;P\&quot;.
+
+### Tab completion for long paths:
+
+You can also use tab completion to autocomplete longer paths.
+
+If you type:
+
+&#x60;&#x60;&#x60;
+~ $ cd Do
+&#x60;&#x60;&#x60;
+
+and press &#x60;Tab&#x60;, nothing will happen because your current directory contains more than one directory that starts with \&quot;Do\&quot;. The shell won\&#x27;t know whether to autocomplete with &#x60;Documents&#x60; or &#x60;Downloads&#x60;.
+
+On the other hand, if you type:
+
+&#x60;&#x60;&#x60;
+~ $ cd Doc
+&#x60;&#x60;&#x60;
+
+and press &#x60;Tab&#x60;, the shell will autocomplete to:
+
+&#x60;&#x60;&#x60;
+~ $ cd Documents/
+&#x60;&#x60;&#x60;
+because in this case, there\&#x27;s only one directory that starts with \&quot;Doc,\&quot; &#x60;Documents&#x60;.
+
+If you press &#x60;Tab&#x60; again, the shell will further autocomplete to:
+
+&#x60;&#x60;&#x60;
+~ $ cd Documents/python-examples/
+&#x60;&#x60;&#x60;
+
+because the folder &#x60;python-examples&#x60; is the only existing file within the &#x60;~/Documents&#x60; directory. With just a few clicks, you can quickly autocomplete longer paths in your command line.
+
+## Command History
+
+Command history allows you to navigate previous commands you\&#x27;ve entered using the &#x60;Up Arrow&#x60; and &#x60;Down Arrow&#x60; keys.
+
+Let\&#x27;s say you\&#x27;ve created a Python script called &#x60;hello_world.py&#x60; in your &#x60;python-examples&#x60; directory that simply prints &#x60;Hello, World!&#x60; when you run it. 
+Consider you have just entered the following sequence of commands, and the shell is awaiting your next input:
+
+&#x60;&#x60;&#x60;
+~ $ cd ~/Documents/python-examples
+~/Documents/python-examples $ python3 myprogram.py
+Hello, World!
+~/Documents/python-examples $ cd /
+/ $
+&#x60;&#x60;&#x60;
+
+In the following exercises, you will learn how to rerun a previous command withut having to retype it by pressing the &#x60;Up Arrow&#x60; key.
+
+### Running the last command:
+
+If you press the &#x60;Up Arrow&#x60; key once, the shell will automatically insert the last command you entered:
+
+&#x60;&#x60;&#x60;
+~ $ cd ~/Documents/python-examples
+~/Documents/python-examples $ python3 myprogram.py
+Hello, World!
+~/Documents/python-examples $ cd /
+/ $ cd /
+&#x60;&#x60;&#x60;
+
+Notice that the last command you entered was &#x60;cd /&#x60;, which has been automatically inserted onto the command line for you.
+
+
+
+### Running previous command from session:
+
+If you press the &#x60;Up Arrow&#x60; key two _additional_ times (so, three times total), the shell will automatically insert the command you ran _three_ commands ago:
+
+&#x60;&#x60;&#x60;
+~ $ cd ~/Documents/python-examples
+~/Documents/python-examples $ python3 myprogram.py
+Hello, World!
+~/Documents/python-examples $ cd /
+/ $ cd ~/Documents/python-examples
+&#x60;&#x60;&#x60;
+In this case, the command you ran three commands ago was &#x60;cd ~/Documents/python-examples&#x60;. Note that the line of printed output, &#x60;Hello, World!&#x60;, does not count as a command. Command history will only take you through commands you entered, not every line that is visible in the terminal.
+
+&gt;**Tip**: If you click the &#x60;Up Arrow&#x60; key too many times, you can use the &#x60;Down Arrow&#x60; key to cycle through your command history in the opposite direction.
+
+
+Press &#x60;Enter&#x60; to return to your &#x60;~/Documents/python-examples&#x60; directory. You should see something like the following:
+
+&#x60;&#x60;&#x60;
+~ $ cd ~/Documents/python-examples
+~/Documents/python-examples $ python3 myprogram.py
+Hello, World!
+~/Documents/python-examples $ cd /
+/ $ cd ~/Documents/python-examples
+~/Documents/python-examples $ 
+&#x60;&#x60;&#x60;
+
+## Summary
+Congratulations! You now know how to use a few convenient shortcuts to speed up your command line interactions!
+
+In this reading, you learned how to:
+- Use tab completion to autocomplete commands
+- Use the command history to quickly navigate to previous commands
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;branch&quot;:&quot;lab-6832-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-27T13:03:39Z&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-08T12:30:22Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs%2Fmodule_1%2Flinux-terminal-tips.md.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs%2Fmodule_1%2Flinux-terminal-tips.md.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs%2Fmodule_1%2Flinux-terminal-tips.md.md.wav","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>
