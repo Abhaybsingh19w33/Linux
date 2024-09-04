@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css?version=3.3.2" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css?version=3.3.2" />
+    <link rel="stylesheet" href="./public/css/custom.css?version=3.3.2" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css?version=3.3.2" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js?version=3.3.2"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt;
+
+# A Brief Introduction to Networking  
+
+Here we introduce some key concepts related to computer networking. This is an optional but recommended reading which is designed to help you build context for what you will be learning later about networking and informational commands.
+
+## Learning Objectives
+
+After completing this reading, you will be able to:
+- Describe computer networks, network resources, and network nodes
+- Explain hosts, clients, and servers
+- Describe packets and pings
+- Explain URLs and IP addresses
+ 
+## Computer Networks
+
+A **computer network** is a set of computers that are able to communicate with each other and share **resources** provided by **network nodes**.  
+
+&gt; Examples of computer networks include Local Area Networks (LANs), Wide Area Networks (WANs), and the entire Internet. The Internet, or World Wide Web, is essentially a giant network of computer networks. 
+
+A network **resource** is any object, such as a file or document, which can be *identified* by the network. 
+
+&gt; An object is identifiable if it can be assigned a unique name and address that the network can use to identify and access it.
+
+A **network node** is any device that participates in a network.  
+
+&gt; A network can include any device which is not necessarily a computer but is part of the network’s infrastructure.  Examples of network nodes include modems, network switches, hubs, and wifi hotspots.  
+
+## Hosts, Clients, and Servers
+
+A **host** is a special type of node in a computer network - it is a computer that can function as a **server** or a **client** on a network.
+
+A **server** is a host computer that is able to accept a connection from a **client** host and fulfill certain resource requests made by the client. 
+
+Many hosts can perform either role, acting as both client and server.
+
+## Packets and Pings
+
+A **network packet** is a formatted chunk of data that can be transmitted over a network. 
+
+Today\&#x27;s computer networks typically use communication protocols that are based on such packets of information. Every packet consists of two types of data: 1. the **control information**, and 2. the **payload**. The control information is data about how and where to deliver the payload, such as the source and destination network addresses, while the payload is the message being sent.
+
+The &#x60;ping&#x60; command works by sending special \&#x27;echo request\&#x27; packets to a host and waiting for a response from the host.
+
+&gt; &#x60;ping&#x60; is a utility available on most operating systems that have networking capability. Linux has its own implementation of the &#x60;ping&#x60; command that\&#x27;s used to test and troubleshoot connectivity to other network hosts. 
+
+## URLs and IP Adresses
+
+IP stands for \&quot;Internet Protocol\&quot; which defines the format of data transmitted over the internet or a local network.
+
+An **IP address** is a code used to uniquely identify any host on a network. 
+
+&gt; An IP address can be used to establish a connection to a host and exchange packets with it, for example using the &#x60;ping&#x60; command. In addition to their payload, IP packets - a type of network packet that conforms to the Internet Protocol - contain the IP addresses of the source and destination hosts.
+
+A **URL**, more commonly known as a web address, stands for *Uniform Resource Locator*.  
+
+&gt; A URL uniquely identifies a web resource and enables access to that resource. Typically the resource that a URL points to is a web page, but it can also be used for tasks such as transferring files, sending emails, and accessing databases.
+
+&gt; For example, the URL to the Wikipedia page for URL is &#x60;https://en.wikipedia.org/wiki/URL&#x60;. Just like for a typical URL, its format indicates a protocol (&#x60;https&#x60;), a hostname (&#x60;en.wikipedia.org&#x60;), and a file name (&#x60;/wiki/URL&#x60;).
+
+## Summary
+
+In this reading, you learned that:
+- A computer network is a set of computers that are able to communicate with each other and share resources. A network resource is any object, such as a file or document, which can be identified by the network. A network node is any device that participates in a network.
+- A host is a computer that can function as a server or a client on a network. A server is a host computer that is able to accept a connection from a client host and fulfill certain resource requests made by the client.
+- A network packet is a formatted chunk of data that can be transmitted over a network. The &#x60;ping&#x60; command works by sending special \&#x27;echo request\&#x27; packets to a host and waiting for a response from the host.
+- An IP address is a code used to uniquely identify any host on a network. A URL identifies a web resource and enables access to that resource.
+
+## Authors
+
+Jeff Grossman
+
+### Other Contributors
+
+Rav Ahuja
+&lt;footer&gt; &lt;img align&#x3D;&quot;left&quot; src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/MXeMas_DKhtICLxUfsJi9w.png&quot;&gt; &lt;/footer&gt;
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By    | Change Description                 |  
+| ----------------- | ------- | --------------| ---------------------------------- |
+| 2023-05-04        | 1.3    | Benny Li| Minor formatting changes |  
+| 2023-04-26        | 1.2     | Nick Yi | QA Pass |  
+| 2023-04-10        | 1.1     | Nick Yi | ID Review |  
+| 2022-12-22        | 1.0     | Jeff Grossman | Created initial version of the reading |  
+
+Copyright (c) 2023 IBM Corporation. All rights reserved.--&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css?version=3.3.2" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js?version=3.3.2"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js?version=3.3.2"></script>
+<script src="./public/js/render.js?version=3.3.2"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;branch&quot;:&quot;lab-5662-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T08:11:19Z&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-08T12:26:14Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M2_A_Brief_Introdution_to_Networking.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs/v4_new_content/labs/readings/M2_A_Brief_Introdution_to_Networking.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M2_A_Brief_Introdution_to_Networking.md.wav","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

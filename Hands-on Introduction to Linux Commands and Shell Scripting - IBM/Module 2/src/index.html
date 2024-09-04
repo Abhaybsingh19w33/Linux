@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt;
+
+# Getting Help for Linux Commands
+
+There is huge value in spending time exploring and experimenting with commands, but there are many things you can\&#x27;t figure out just by experimenting. You need to see what\&#x27;s out there, see what\&#x27;s possible, and learn where to look to get answers. Let\&#x27;s take a look at some great ways to get the information you need to help you make progress.
+
+In this reading, you may see links to external sources. You can open them by right-clicking and pressing \&quot;Open in new tab.\&quot;
+
+## 1. Use the built-in &#x60;man&#x60; command  
+The &#x60;man&#x60; command, which stands for \&quot;manual\&quot;, provides the standard way to access help for Unix-like commands from the command prompt. It has been in development since 1971. 
+
+You can get a listing of all the commands on your system that have a manual page by entering:
+&#x60;&#x60;&#x60;
+man -k .
+&#x60;&#x60;&#x60;
+The resulting list includes a brief description of what each command does.
+
+To see the &#x60;man&#x60; page for a command, simply enter: 
+
+&#x60;&#x60;&#x60; 
+man command_name 
+&#x60;&#x60;&#x60;
+All &#x60;man&#x60; pages are divided into several sections, including:
+
+ ##### NAME
+&gt;  The name of the command or feature and a brief description of what it does.
+ ##### SYNOPSIS
+&gt; A summary of the command syntax, including any options and arguments that can be used.
+##### DESCRIPTION
+&gt; A more detailed description of the command, including its function and behavior.
+##### OPTIONS
+&gt; All the available options and arguments that can be used with the command.
+##### EXAMPLES
+&gt; Some examples of how to use the command.
+##### SEE ALSO
+&gt; Related commands and documentation that may be helpful. 
+
+You may also see other sections, including: EXIT STATUS, RETURN VALUE, ENVIRONMENT, BUGS, FILES, AUTHOR, REPORTING BUGS, HISTORY, and COPYRIGHT.
+
+## 2. Install and use the &#x60;tldr&#x60; command
+Similar to &#x60;man&#x60; pages, [TLDR Pages](https://tldr.sh/ &quot;TLDR Pages&quot;) is a free and open-source collaborative documentation effort. The goal is to create documentation that is more accessible than the traditional &#x60;man&#x60; pages, which tend to be quite verbose.  
+
+TLDR Pages, short for \&quot;Too Long; Didn\&#x27;t Read\&quot; and also known simply as *tldr*, provide examples for common use cases of various commands. The format of TLDR pages is similar to that of a cheatsheet.
+
+You can install a command-line tool to access TLDR Pages from your terminal. Install it using the following command: 
+
+&#x60;&#x60;&#x60;
+npm install -g tldr
+&#x60;&#x60;&#x60;
+
+Once you\&#x27;ve installed the tool, you can use the &#x60;tldr&#x60; command to easily access the TLDR page of a command.
+
+&#x60;&#x60;&#x60; 
+tldr command_name 
+&#x60;&#x60;&#x60;
+The tool will display a short, easy-to-understand summary of the command along with some examples of how to use it.
+
+## 3. Search Stack Overflow
+Stack Overflow is a popular community-driven question and answer platform for programmers, developers, and system administrators. It has a vast repository of questions and answers related to various programming languages, tools, and operating systems, including Linux.
+
+To search for information about commands on Stack Overflow, you can use the search bar on the homepage and enter the name of the command you\&#x27;re looking for, along with any specific keywords or parameters. You can also refine your search by adding relevant tags, such as \&quot;linux\&quot; or \&quot;command-line\&quot;.
+
+Once you\&#x27;ve entered your search query, Stack Overflow will display a list of relevant questions and answers that match your query. You can browse through the results to find the information you need, and even post your own question if you can\&#x27;t find an answer to your specific query.
+
+When searching for information about commands on Stack Overflow, it\&#x27;s important to check the date of the answers to ensure that the information is still current and relevant. You should also read through the comments and discussion threads to get a better understanding of the context and any potential issues or limitations related to the command you\&#x27;re researching.
+
+&gt; Newest questions on Stack Overflow tagged \&quot;Linux\&quot;: https://stackoverflow.com/questions/tagged/linux
+
+## 4. Search Stack Exchange
+Stack Exchange is a network of question and answer communities, similar to Stack Overflow, but covering a broader range of topics beyond just programming. There are several Stack Exchange communities that specialize in topics related to Linux and open source software, such as Unix &amp; Linux, Ask Ubuntu, and Server Fault.
+
+Visit the relevant community to search for information on Stack Exchange. Like Stack Overflow, you can use the search bar to enter the name of the command you\&#x27;re looking for, along with any keywords or parameters.
+
+&gt; Unix and Linux community on Stack Exchange: https://unix.stackexchange.com/
+
+## 5. Just google it!
+Google is a powerful tool that can provide you the answer to almost any question. Learn how to enter the right queries and filter your results, such as by including \&quot;Wikipedia\&quot;, \&quot;Stack Overflow\&quot;, or \&quot;Linux\&quot; as part of your search. However, use at your own risk. Never blindly trust what you find on the web - there\&#x27;s a lot of noise out there!
+
+## 6. Use the cheat sheets from this course
+Throughout this course, you will encounter \&quot;cheat sheets\&quot; that condense the information you\&#x27;ve learned into easy-to-reference guides. They are great for reviewing the material you\&#x27;ve learned and can also help you out with your graded assignments.
+
+## 7. Refer to Wikipedia\&#x27;s list of Unix commands:
+Finally, Wikipedia maintains a list of commands that can be found on Unix operating systems, along with a short description. You can check the page to quickly reference a Unix command: https://en.wikipedia.org/wiki/List_of_Unix_commands
+
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By    | Change Description                     |  
+| ----------------- | ------- | --------------| -------------------------------------- |  
+| 2023-05-04       | 1.3     | Benny Li | QA pass |  
+| 2023-04-27       | 1.2     | Nick Yi | QA pass |  
+| 2023-04-10       | 1.1     | Nick Yi | ID Review |  
+| 2022-12-22        | 1.0     | Jeff Grossman | Created initial version of the reading |  
+
+Copyright (c) 2023 IBM Corporation. All rights reserved.--&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;branch&quot;:&quot;lab-5664-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T08:11:29Z&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-08T12:16:24Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M2_Getting_Help_for_Linux_Commands.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs/v4_new_content/labs/readings/M2_Getting_Help_for_Linux_Commands.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M2_Getting_Help_for_Linux_Commands.md.wav","isValid":true,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

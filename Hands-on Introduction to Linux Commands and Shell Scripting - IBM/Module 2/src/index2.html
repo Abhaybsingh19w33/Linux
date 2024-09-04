@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt;
+
+# Security: Managing File Permisions and Ownership
+
+## Learning Objectives
+After completing this reading, you will be able to:
+- Explain file ownership and permissions
+- View file and directory permissions
+- Make a file private
+
+### Why do we need file permissions and ownership?
+Linux is a multi-user operating system. This means that by default, other users will be able to view any files you store on the system. However, you may have some files - such as your personal tax documents or your employer\&#x27;s intellectual property documents - that are private or confidential. How can you protect these sensitive documents from being viewed or modified by others?
+
+### File ownership and permissions
+There are three possible levels of file ownership in Linux: user, group, and other.
+Whoever creates a file, namely the **user** at the time of creation, becomes the owner of that file by default. A **group** of users can also share ownership of a file. The **other** category essentially refers anyone in the universe with access to your Linux machine - careful when assigning ownership permission to this level!
+
+Only an official owner of a file is allowed to change its permissions. This means that only owners can decide who can read the file, write to it, or execute it.
+
+### Viewing file permissions
+Let\&#x27;s say you\&#x27;ve entered the following lines of code:
+
+&#x60;&#x60;&#x60;
+$ echo &quot;Who can read this file?&quot; &gt; my_new_file
+$ more my_new_file
+Who can read this file?
+$ ls -l my_new_file
+-rw-r--r-- 1 theia users 25 Dec 22 17:47 x
+&#x60;&#x60;&#x60;
+Here we\&#x27;ve echoed the string &#x60;&quot;Who can read this file?&quot;&#x60; into a new file called &#x60;my_new_file&#x60;. The next line uses the &#x60;more&#x60; command to print the contents of the new file. Finally, the &#x60;ls&#x60; command with the &#x60;-l&#x60; option displays the file\&#x27;s (default) permissions: &#x60;rw-r--r--&#x60;
+
+The first three characters (&#x60;rw-&#x60;) define the **user** permissions, the next three (&#x60;r--&#x60;) the **group** pemissions, and the final three (&#x60;r--&#x60;) the **other** permissions.
+
+So you, being the user, have the permission &#x60;rw-&#x60;, which means you have read and write permissions by default, but do not have execution permissions. Otherwise there would be an &#x60;x&#x60; in place of the last &#x60;-&#x60;.
+
+Thus by looking at the entire line, &#x60;rw-r--r--&#x60;, you can see that anyone can read the file, nobody can execute it, and you are the only user that can write to it.
+
+&gt; **Note:** The &#x60;-&#x60; at the very beginning of the line in the terminal means that the permissions are referring to a file. If you were getting the permissions to a directory, you would see a &#x60;d&#x60; in the front for \&quot;directory\&quot;.
+
+### Directory permissions
+
+The permissions for directories are similar but distinct for files. Though directories use the same &#x60;rwx&#x60; format, the symbols have slightly different meanings.
+
+The following table illustrates the meanings of each permission for directories:
+
+| Directory Permission  | Permissible action(s)                      |
+| --------------------- | ------------------------------------------ |
+| &#x60;r&#x60;                   | List directory contents using &#x60;ls&#x60; command |
+| &#x60;w&#x60;                   | Add or remove files or directories         |
+| &#x60;x&#x60;                   | Enter directory using &#x60;cd&#x60; command         |
+
+Setting appropriate permissions on directories is a best practice for both security and stability reasons. Though this reading focuses on security, you will learn more about other reasons for setting file permissions and ownership later in this course.
+
+### Making a file private
+
+You can revoke read permissions from your group and all other users by using the &#x60;chmod&#x60; command. Ensure successful modification by using the &#x60;ls -l&#x60; command again:
+
+&#x60;&#x60;&#x60;
+chmod go-r my_new_file
+ls -l my_new_file
+-rw------- 1 theia users 24 Dec 22 18:49 my_new_file
+&#x60;&#x60;&#x60;
+In the &#x60;chmod&#x60; command, &#x60;go-r&#x60; is the permission change to be applied, which in this case means removing for the group (&#x60;g&#x60;) and others (&#x60;o&#x60;) the read (&#x60;r&#x60;) permission. The &#x60;chmod&#x60; command can be used with both files and directories.
+
+### Executable files - looking ahead
+You\&#x27;ve learned what it means to read or write to a file, but what does it mean to have permissions to **execute** a file in Linux?
+
+A Linux file is executable if it contains instructions that can be directly interpreted by the operating system. Basically, an exectuable file is a ready-to-run program. They\&#x27;re also referred to as **binaries** or **executables**. 
+
+In this course, you will become very familiar with a particular kind of executable called a **script**, which is a program written in a scripting language. You\&#x27;ll learn all about **shell scripting**, or more specifically **Bash scripting**, which is writing scripts in Bash (*born-again shell*), a very popular shell scripting language. A shell script is a plain text file that can be interpreted by a shell.
+
+Formally speaking, for a text file to be considered an executable shell script for a given user, it needs to have two things:
+
+1. Execute permissions set for that user
+2. A directive, called a \&quot;shebang\&quot;, in its first line to declare itself to the operating system as a binary
+ 
+All of this will become more clear to you soon when we get to the topic of shell scripting.
+
+## Summary
+In this reading, you learned that:
+- There are three possible levels of file ownership in Linux - user, group, and other - which determine who can read, write to, and execute a file
+- You can use the &#x60;ls -l&#x60; command to view file and directory permissions
+- You can change permissions on a file by using the &#x60;chmod&#x60; command
+
+!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By    | Change Description                     |  
+| ----------------- | ------- | --------------| -------------------------------------- |
+| 2023-05-04        | 1.4     | Benny Li       | QA Pass
+| 2023-04-28        | 1.3     | Nick Yi       | QA Pass                                |  
+| 2023-04-10        | 1.2     | Nick Yi       | ID Review                              |  
+| 2023-01-11        | 1.1     | Jeff Grossman | Added directory permissions content    |  
+| 2022-12-22        | 1.0     | Jeff Grossman | Created initial version of the reading |  
+
+Copyright (c) 2023 IBM Corporation. All rights reserved.--&gt;</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;branch&quot;:&quot;lab-5666-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T08:12:12Z&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-08T12:21:46Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M2_Security%3A_Managing_File_Permissions_and_Ownership.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs/v4_new_content/labs/readings/M2_Security%3A_Managing_File_Permissions_and_Ownership.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M2_Security%3A_Managing_File_Permissions_and_Ownership.md.wav","isValid":true,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

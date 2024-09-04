@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Hands-on Lab: Wrangling Text Files at the Command Line&quot;}
+
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+
+&lt;br&gt;
+
+Estimated time needed: **40** minutes
+
+---
+
+Consider that any text file can potentially be interpreted as some sort of dataset. For example, your text file might contain the following: 
+
+- The kind of text that you might find in a news article or blog post
+- The source HTML code that defines a web page
+- A table-like structure consisting of *text fields* separated by a *delimiter* such as a comma or Tab
+- The data stream that encodes a song or a movie
+- A completely random sequence of characters, such as:
+  -  an encryption key or password
+  -  a digitized random noise sequence
+
+Whatever your text file may be, you can benefit from being able to perform some basic text processing to *munge*, *wrangle*, *clean*, and *integrate* your data the way you need it.
+
+## Learning Objectives
+
+Working through the exercises in this lab will enable you to perform some basic but essential text wrangling operations. These operations will allow you to work with text files by:
+
+- Displaying and exploring file contents
+- Extracting and displaying first or last N lines of text
+- Displaying counts of lines, words, and characters in text
+- Sorting lines (rows) of text
+- Dropping consecutively duplicated lines of text
+- Extracting lines of text containing a pattern match
+- Extracting fields from lines of text
+- Merging text files as aligned columns of text
+
+These are some of the building blocks of filtering text files. Later in this course, you will learn how to combine such operations. This will empower you to start engineering sophisticated views of your data by creating complex data-processing flows called *data pipelines*.
+
+::page{title&#x3D;&quot;About Skills Network Cloud IDE&quot;}
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands-on labs for course and project related labs. Theia is an open source IDE (Integrated Development Environment), that can be run on desktop or on the cloud. To complete this lab, you will be using the Cloud IDE based on Theia.
+
+## Important notice about this lab environment
+
+Please be aware that sessions for this lab environment are not persisted. Thus, every time you connect to this lab, a new environment is created for you and any data or files you may have saved in a previous session will be lost. To avoid losing your data, plan to complete these labs in a single session.
+
+::page{title&#x3D;&quot;Exercise 1 - Viewing file contents&quot;}
+
+**&#x60;cat&#x60;**  
+**&#x60;more&#x60;**  
+**&#x60;less&#x60;**  
+
+In this exercise, you will learn how to explore file contents using the &#x60;cat&#x60;, &#x60;more&#x60;, and &#x60;less&#x60; commands to display the file contents in your terminal window.
+
+Begin by changing directories to your default home directory, &#x60;~&#x60;, or &#x60;\home\theia&#x60;:  
+
+&#x60;&#x60;&#x60;
+cd ~
+&#x60;&#x60;&#x60;
+
+Using the &#x60;ls&#x60; command, you should see a file called &#x60;entrypoint.sh&#x60;. The &#x60;.sh&#x60; is a convention used to identify a text file as being a *shell script*.
+
+Next, let\&#x27;s take a look inside this file.
+
+### 1.1. Viewing file content with the &#x60;cat&#x60; command
+
+The &#x60;cat&#x60; command displays the contents of the file and exits back to the command prompt as follows:
+
+&#x60;&#x60;&#x60;
+cat entrypoint.sh
+&#x60;&#x60;&#x60;
+
+It only displays the tail end of the file, so if the file is too long to fit on the terminal, you won\&#x27;t be able to see some of its contents.
+
+Although the &#x60;cat&#x60; command may not be the best way to view the contents of a file, especially larger files, it is quite useful for shell scripting applications. For example, it is often used to *concatenate*, or append one file onto another.
+
+### 1.2. Viewing file content with the &#x60;more&#x60; command
+
+A better alternative to the &#x60;cat&#x60; command for viewing file contents is the &#x60;more&#x60; command. By entering the following command:
+
+&#x60;&#x60;&#x60;
+more entrypoint.sh
+&#x60;&#x60;&#x60; 
+
+you will see the top portion of the file first.
+
+&gt;**Tip:** The first line of this particular file, &#x60;#!/bin/bash&#x60;, is called a *shebang*. Basically, this shebang line makes the file a *bash script* by invoking the bash shell. You will learn more about shebang lines later in this course.
+
+When using the &#x60;more&#x60; command, you can see only as many lines as will fit on your terminal window at once.
+
+To see the next portion of the file, just press your spacebar. You can keep *paging* this way, tapping the spacebar until you reach the end of the file. Once you reach the last *page*, you will exit back to the command prompt. 
+
+Another way to exit is simply to type &#x60;q&#x60;, which quits and returns to the command prompt.
+
+### 1.3. Scrolling through file content with the &#x60;less&#x60; command
+
+What if you want to move up and down through the file, not just downward? In this case, you can use the &#x60;less&#x60; command:
+
+&#x60;&#x60;&#x60;
+less entrypoint.sh
+&#x60;&#x60;&#x60;  
+
+Just like &#x60;more&#x60;, the &#x60;less&#x60; command displays the first page of the file. What\&#x27;s useful about &#x60;less&#x60; is that you can use it to move around the file, page by page, using the &#x60;Page Up&#x60; and &#x60;Page Down&#x60; keys.
+
+You can also scroll up and down through the file line-by-line, using the &#x60;Up Arrow&#x60; and &#x60;Down Arrow&#x60; keys, &amp;#8593; and &amp;#8595;.
+
+Unlike &#x60;more&#x60;, &#x60;less&#x60; does not automatically exit when you reach the end of a file, allowing you the option to continue scrolling around. You can quit at any time by typing &#x60;q&#x60;.
+
+
+::page{title&#x3D;&quot;Exercise 2 - Viewing text file contents&quot;}
+
+In this exercise, you will work with a few more commands for viewing the content of text files.
+
+To begin, run the following commands:
+
+&#x60;&#x60;&#x60;
+cd /home/project
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/usdoi.txt
+&#x60;&#x60;&#x60;
+
+The &#x60;wget&#x60; command downloads a text file called &#x60;usdoi.txt&#x60; from the provided URL. You\&#x27;ll see this command again later in the context of networking commands. You can check to see if you successfully downloaded the &#x60;usdoi.txt&#x60; by using the &#x60;ls&#x60; command.
+
+### 2.1. Display the first N lines of a file
+
+**&#x60;head&#x60;**
+
+By default, &#x60;head&#x60; will print the first 10 lines of a file. To use it with &#x60;usdoi.txt&#x60;, enter the following:
+
+&#x60;&#x60;&#x60;
+head usdoi.txt
+&#x60;&#x60;&#x60;
+
+You can also specify the number of lines to be printed. Print only the first ***3*** lines of text from the file &#x60;usdoi.txt&#x60; by entering:
+
+&#x60;&#x60;&#x60;
+head -3 usdoi.txt
+&#x60;&#x60;&#x60;
+
+   
+
+### 2.2. Display the last N lines of a file
+
+**&#x60;tail&#x60;**
+
+By default, &#x60;tail&#x60; will print the last 10 lines of the file &#x60;usdoi.txt&#x60;:
+
+&#x60;&#x60;&#x60;
+tail usdoi.txt
+&#x60;&#x60;&#x60;
+
+Just like with &#x60;head&#x60;, you can specify the number of lines to be printed. Print the last ***2*** lines of the file &#x60;usdoi.txt&#x60; by entering the following:
+
+&#x60;&#x60;&#x60;
+tail -2 usdoi.txt
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Exercise 3 - Getting basic text file stats&quot;}
+
+### 3.1. Count lines, words, or characters from a text file
+
+**&#x60;wc&#x60;**
+
+If you want to find the number of lines, words, and characters in a file like &#x60;usdoi.txt&#x60;, enter the following command: 
+
+&#x60;&#x60;&#x60;
+wc usdoi.txt
+&#x60;&#x60;&#x60;
+
+The output contains the number of lines, followed by the number of words, followed by the number of characters in the file.
+
+To get just the count of lines in &#x60;usdoi.txt&#x60;, use the &#x60;-l&#x60; option:
+
+&#x60;&#x60;&#x60;
+wc -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+Similarly, for the count of words in &#x60;usdoi.txt&#x60;, use the &#x60;-w&#x60; option:
+
+&#x60;&#x60;&#x60;
+wc -w usdoi.txt
+&#x60;&#x60;&#x60;
+
+To print the number of characters in &#x60;usdoi.txt&#x60;, use the &#x60;-c&#x60; option:
+
+&#x60;&#x60;&#x60;
+wc -c usdoi.txt
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Exercise 4 - Basic text wrangling: sorting lines and dropping duplicates&quot;}
+
+### 4.1. Sort and display lines of file alphanumerically
+
+**&#x60;sort&#x60;**
+
+You can use the &#x60;sort&#x60; command to display the lines of a file sorted alphanumerically.
+
+To view the lines of &#x60;usdoi.txt&#x60; sorted alphanumerically, enter:
+
+&#x60;&#x60;&#x60;
+sort usdoi.txt
+&#x60;&#x60;&#x60;
+
+To view those lines sorted in reverse order, enter:
+
+&#x60;&#x60;&#x60;
+sort -r usdoi.txt
+&#x60;&#x60;&#x60;
+
+### 4.2. Drop consecutive duplicated lines and display result
+
+**&#x60;uniq&#x60;**
+
+First download the following file:
+
+&#x60;&#x60;&#x60;
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/module%201/zoo.txt
+&#x60;&#x60;&#x60;
+
+View the raw contents of &#x60;zoo.txt&#x60; with the &#x60;cat&#x60; command:
+
+&#x60;&#x60;&#x60;
+cat zoo.txt
+&#x60;&#x60;&#x60;
+
+View the contents of &#x60;zoo.txt&#x60; with identical, consecutive lines dropped using the &#x60;uniq&#x60; command:
+
+&#x60;&#x60;&#x60;
+uniq zoo.txt
+&#x60;&#x60;&#x60;
+The &#x60;uniq&#x60; line will drop any lines in the file that are identical *and* consecutive. This is similar to what is known as \&quot;dropping duplicates\&quot;. As you can see from this example, however, there can still be duplicated lines left over if these lines are not repeated right after the other.
+
+::page{title&#x3D;&quot;Exercise 5 - Basic text wrangling: extracting lines and fields&quot;}
+
+### 5.1. Extract lines matching a specified criterion
+
+**&#x60;grep&#x60;**
+
+The &#x60;grep&#x60; command allows you to specify a pattern and search for lines within a file that match that pattern.
+
+For example, the following command prints all lines in the file &#x60;usdoi.txt&#x60; which contain the word &#x60;people&#x60;:
+
+&#x60;&#x60;&#x60;
+grep people usdoi.txt
+&#x60;&#x60;&#x60;
+
+Some frequently used options for &#x60;grep&#x60; include:  
+
+| Option | Description                                                |  
+| -------| ---------------------------------------------------------  |  
+| &#x60;-n&#x60;   | Along with the matching lines, also print the line numbers |  
+| &#x60;-c&#x60;   | Get the count of matching lines                            |  
+| &#x60;-i&#x60;   | Ignore the case of the text while matching                 |  
+| &#x60;-v&#x60;   | Print all lines which do not contain the pattern           |  
+| &#x60;-w&#x60;   | Match only if the pattern matches whole words              |  
+
+You can use these options to print all the lines from the &#x60;/etc/passwd&#x60; file which do not contain the pattern &#x60;login&#x60;:
+
+&#x60;&#x60;&#x60;
+grep -v login /etc/passwd
+&#x60;&#x60;&#x60;
+
+### 5.2. Extract fields from lines of text
+
+**&#x60;cut&#x60;**
+
+The &#x60;cut&#x60; command allows you to view only specific fields from each line of text in a file.
+
+For example, you can use &#x60;cut&#x60; with the &#x60;-c&#x60; option to view only the *first two* characters of each line:
+
+&#x60;&#x60;&#x60;
+cut -c -2 zoo.txt
+&#x60;&#x60;&#x60;
+
+Or to view each line *starting from* the second character:
+
+&#x60;&#x60;&#x60;
+cut -c 2- zoo.txt
+&#x60;&#x60;&#x60;
+
+The &#x60;cut&#x60; command can also be used to extract a field from a delimited file. 
+To demonstrate this, start by downloading and taking a look at the following comma-separated file:
+
+&#x60;&#x60;&#x60;
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/names_and_numbers.csv
+cat names_and_numbers.csv
+&#x60;&#x60;&#x60;
+
+Now you can extract just the phone numbers for each person listed in the file using the &#x60;-d&#x60; (delimiter) and &#x60;f&#x60; (field) options as follows:
+
+&#x60;&#x60;&#x60;
+cut -d &quot;,&quot; -f2 names_and_numbers.csv
+&#x60;&#x60;&#x60;
+&#x60;-d &quot;,&quot;&#x60; tells the command that the delimiter is a comma, and &#x60;-f2&#x60; tells it to extract the second field.
+
+::page{title&#x3D;&quot;Exercise 6 - Basic text wrangling: merging lines as fields&quot;}
+
+### 6.1. Merge text files line-by-line, aligned as columns
+
+**&#x60;paste&#x60;**
+
+Use the &#x60;paste&#x60; command to merge lines of multiple files together.
+
+Download the following file:
+
+&#x60;&#x60;&#x60;
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/module%201/zoo_ages.txt
+&#x60;&#x60;&#x60;
+
+Then use the &#x60;paste&#x60; command to view the two files merged together, line-by-line, as columns delimited by a &#x60;Tab&#x60; character:
+
+&#x60;&#x60;&#x60;
+paste zoo.txt zoo_ages.txt
+&#x60;&#x60;&#x60;
+
+Try changing the delimiter. Instead of the default &#x60;Tab&#x60; delimiter, you can specify a comma &#x60;,&#x60; as follows:
+
+&#x60;&#x60;&#x60;
+paste -d &quot;,&quot; zoo.txt zoo_ages.txt
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Practice Exercises&quot;}
+
+Before you begin, ensure you\&#x27;re working in your home directory by entering:
+
+&#x60;&#x60;&#x60;
+cd ~
+pwd
+&#x60;&#x60;&#x60;
+
+##### 1. Display the number of lines in the &#x60;/etc/passwd file&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;wc&#x60; command with the appropriate option.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+wc -l /etc/passwd
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 2. Display the lines that contain the string &#x60;&quot;not installed&quot;&#x60; in &#x60;/var/log/bootstrap.log&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;grep&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+grep &quot;not installed&quot; /var/log/bootstrap.log
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 3. The text file at &#x60;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/top-sites.txt&#x60; contains a list of popular websites. Find all the websites on the list that have the word &#x60;&quot;org&quot;&#x60; in them.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;wget&#x60; command to download the file.
+Use the &#x60;grep&#x60; command to search.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/top-sites.txt
+grep org top-sites.txt 
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Alternative Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+curl -o top-sites.txt https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/top-sites.txt
+grep org top-sites.txt 
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 4.  Print the first seven lines of &#x60;top-sites.txt&#x60;.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;head&#x60; command with the correct arguments.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+head -n 7 top-sites.txt
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 5. Print the last seven lines of &#x60;top-sites.txt&#x60;.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;tail&#x60; command with the correct arguments.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+tail -n 7 top-sites.txt
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 6. Print the first three characters of each line from &#x60;top-sites.txt&#x60;.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;cut&#x60; command with the correct arguments.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cut -c -3 top-sites.txt
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 7. Extract and view only the names, without their phone numbers, from the file &#x60;names_and_numbers.csv&#x60;.
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Hint&lt;/summary&gt;
+	
+&gt; Use &#x60;cd&#x60; to return to your &#x60;/home/project&#x60; directory, where &#x60;names_and_numbers.csv&#x60; is located.
+
+&gt; Use the &#x60;cut&#x60; command with the correct arguments.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cd /home/project
+cut -d &quot;,&quot; -f 1 names_and_numbers.csv
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+In this lab, you learned how to:
+- View file contents with &#x60;cat&#x60;, &#x60;more&#x60;, and &#x60;less&#x60;
+- See the first and last N lines of a file using &#x60;head&#x60; and &#x60;tail&#x60;
+- Find the number of lines, words, and characters in a file with &#x60;wc&#x60;
+- Sort lines and drop duplicates using &#x60;sort&#x60; and &#x60;uniq&#x60;
+- Extract lines and fields from a file with &#x60;grep&#x60; and &#x60;cut&#x60;
+- Merge text files using &#x60;paste&#x60;
+
+	
+## Authors
+
+Jeff Grossman  
+Ramesh Sannareddy  
+Sam Prokopchuk  
+
+### Other contributors
+
+Rav Ahuja
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                 |
+| ----------------- | ------- | ----------------- |----------------------------------- |
+| 2023-05-04        | 3.3     | Benny Li       | Minor formatting changes                  |
+| 2023-04-19        | 3.2     | Steve Hord        | QA pass with edits                  |
+| 2023-04-13        | 3.1     | Nick Yi		      | ID Review                          |
+| 2023-01-10        | 3.0     | Jeff Grossman     | Split and replace with new content |
+| 2021-12-02        | 2.1     | Jeff Grossman     | Review and Update lab              |
+| 2021-11-29        | 2.0     | Sam Prokopchuk    | Update lab contents and split      |
+| 2021-05-30        | 1.0     | Ramesh Sannareddy | Created initial version of the lab |
+
+Copyright (c) 2021-23 IBM Corporation. All rights reserved.--&gt;
+
+&lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-5637-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:46:48Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_new_content%2Flabs%2FM2_Lab_Wrangling_Text_Files_at_the_Command_Line.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

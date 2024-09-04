@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Hands-on Lab: Archiving and Compressing Files&quot;}
+
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+
+
+Estimated time needed: **15** minutes
+
+## Learning Objectives
+
+After completing this lab, you will be able to:
+
+- Create archives for sets of files and folders
+- Compress and decompress files
+- Extract files and folders from an existing archive
+
+::page{title&#x3D;&quot;About Skills Network Cloud IDE&quot;}
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands-on labs for course and project related labs. Theia is an open source IDE (Integrated Development Environment), that can be run on the desktop or on the cloud. To complete this lab, you will be using the Cloud IDE based on Theia.
+
+## Important notice about this lab environment
+
+Please be aware that sessions for this lab environment are not persisted. Thus, every time you connect to this lab, a new environment is created for you, and any data or files you may have saved in a previous session will be lost. To avoid losing your data, plan to complete these labs in a single session.
+
+::page{title&#x3D;&quot;Exercise 1 - File and folder archiving and compression&quot;}
+
+### 1.1. Create and manage file archives
+
+**&#x60;tar&#x60;**
+
+The &#x60;tar&#x60; command allows you to pack multiple files and directories into a single archive file.
+
+The following command creates an archive of the entire &#x60;/bin&#x60; directory and writes the archive to a single file named &#x60;bin.tar&#x60;.&lt;br&gt;
+
+The options used are as follows:
+
+| Option | Description                     |
+| ------ | ------------------------------- |
+| -c     | Create new archive file         |
+| -v     | Verbosely list files processed  |
+| -f     | Archive file name               |
+
+&#x60;&#x60;&#x60;
+tar -cvf bin.tar /bin
+&#x60;&#x60;&#x60;
+
+To see the list of files in the archive, use the &#x60;-t&#x60; option:
+
+&#x60;&#x60;&#x60;
+tar -tvf bin.tar
+&#x60;&#x60;&#x60;
+
+To untar the archive or extract files from the archive, use the &#x60;-x&#x60; option:
+
+&#x60;&#x60;&#x60;
+tar -xvf bin.tar
+&#x60;&#x60;&#x60;
+
+Use the &#x60;ls&#x60; command to verify that the folder &#x60;bin&#x60; is extracted.
+
+&#x60;&#x60;&#x60;
+ls -l
+&#x60;&#x60;&#x60;
+
+### 1.2. Package and compress archive files
+
+**&#x60;zip&#x60;**
+
+The &#x60;zip&#x60; command allows you to compress files.
+
+The following command creates a zip file named &#x60;config.zip&#x60; consisting of all the files with extension &#x60;.conf&#x60; in the &#x60;/etc&#x60; directory.
+
+&#x60;&#x60;&#x60;
+zip config.zip /etc/*.conf
+&#x60;&#x60;&#x60;
+
+The **&#x60;-r&#x60;** option can be used to zip an entire directory.
+
+The following command creates an archive of the &#x60;/bin&#x60; directory. 
+
+&#x60;&#x60;&#x60;
+zip -r bin.zip /bin
+&#x60;&#x60;&#x60;
+
+### 1.3. Extract, list, or test compressed files in a ZIP archive
+
+**&#x60;unzip&#x60;**
+
+The &#x60;unzip&#x60; command allows you to extract files.
+
+To list the files of the archive &#x60;config.zip&#x60;, enter the following:
+
+&#x60;&#x60;&#x60;
+unzip -l config.zip
+&#x60;&#x60;&#x60;
+
+The following command extracts all the files in the archive &#x60;bin.zip&#x60;.
+
+&#x60;&#x60;&#x60;
+unzip -o bin.zip
+&#x60;&#x60;&#x60;
+
+We added the &#x60;-o&#x60; option to force overwrite in case you run the command more than once.
+
+You should see a folder named &#x60;bin&#x60; created in your directory.
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+In this lab, you learned that:
+- &#x60;tar&#x60; allows you to pack multiple files and directories into a single archive file
+- &#x60;zip&#x60; allows you to compress files
+- &#x60;unzip&#x60; allows you to extract files
+
+## Authors
+
+Ramesh Sannareddy  
+Sam Prokopchuk  
+
+### Other contributors
+
+Rav Ahuja  
+Jeff Grossman
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                 |
+| ----------------- | ------- | ----------------- |----------------------------------- |
+| 2023-05-04        | 3.3    | Benny Li      | QA pass            |
+| 2023-04-26        | 3.2     | Steve Hord        | QA pass with edits             |
+| 2023-04-13        | 3.1     | Nick Yi           | ID Review                          | 
+| 2023-01-10        | 3.0     | Jeff Grossman     | Split lab and add new content      |  
+| 2021-12-02        | 2.1     | Jeff Grossman     | Review and Update lab              |  
+| 2021-11-29        | 2.0     | Sam Prokopchuk    | Update lab contents and split      |  
+| 2021-05-30        | 1.0     | Ramesh Sannareddy | Created initial version of the lab |  
+
+Copyright (c) 2021-23 IBM Corporation. All rights reserved.
+--&gt;
+&lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-5633-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:46:24Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_new_content%2Flabs%2FM2_Lab_Archiving_and_Compressing_Files.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

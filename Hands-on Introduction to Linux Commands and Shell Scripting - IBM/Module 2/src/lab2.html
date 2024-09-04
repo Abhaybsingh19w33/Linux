@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Hands-on Lab: Navigating and Managing Files and Directories&quot;}
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+
+
+Estimated time needed: **30** minutes
+
+## Learning Objectives
+
+After completing this lab, you will be able to:
+
+- Get the location of your present working directory
+- List the files and directories within a directory
+- Create a new directory
+- Change your present working directory
+- Create a new file
+- Search for and locate files
+- Remove, rename, move, or copy a file
+
+::page{title&#x3D;&quot;About Skills Network Cloud IDE&quot;}
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands on labs for course and project related labs. Theia is an open source IDE (Integrated Development Environment), that can be run on desktop or on the cloud. To complete this lab, you will be using the Cloud IDE based on Theia.
+
+## Important notice about this lab environment
+
+Please be aware that sessions for this lab environment are not persisted. Thus, every time you connect to this lab, a new environment is created for you and any data or files you may have saved in a previous session will be lost. To avoid losing your data, plan to complete these labs in a single session.
+
+::page{title&#x3D;&quot;Exercise 1 - Navigating Files and Directories&quot;}
+
+In these exercises, you will practice using commands for navigating and managing files and directories.
+
+### 1.1. Get the location of the present working directory
+
+**&#x60;pwd&#x60;**
+
+When working in a Linux terminal, you will always be working from a directory. By default, you will start in your home directory. To get the absolute path of your present working directory, enter the following:
+
+&#x60;&#x60;&#x60;
+pwd
+&#x60;&#x60;&#x60;
+
+This will print the name of the directory you are currently working in.
+
+### 1.2. List the files and directories in a directory
+
+**&#x60;ls&#x60;**
+
+To list the files and directories in the current directory, enter the following:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+If your directory happens to be empty, &#x60;ls&#x60; will not return anything.
+
+The following command will list the many binary and executable files which are present in your &#x60;/bin&#x60; (binaries) directory.
+
+&#x60;&#x60;&#x60;
+ls /bin
+&#x60;&#x60;&#x60;
+
+The &#x60;/bin&#x60; directory happens to be where Linux commmands such as &#x60;ls&#x60; and &#x60;pwd&#x60; are stored. For example, you can see that &#x60;ls&#x60; is present by entering the following:
+
+&#x60;&#x60;&#x60;
+ls /bin/ls
+&#x60;&#x60;&#x60;
+
+To list all files starting with &#x60;b&#x60; in the  &#x60;/bin&#x60; directory, try entering the following:
+
+&#x60;&#x60;&#x60;
+ls /bin/b*
+&#x60;&#x60;&#x60;
+
+&gt; **Tip:** The asterisk &#x60;*&#x60; is a special character called a *wildcard*. It is used to represent any string of characters.
+
+To list all files ending in &#x60;r&#x60; in the  &#x60;/bin&#x60; directory, enter the following:
+
+&#x60;&#x60;&#x60;
+ls /bin/*r
+&#x60;&#x60;&#x60;
+
+To print a longer list of files with additional information, such as the last-modified date, enter the following:
+
+&#x60;&#x60;&#x60;
+ls  -l
+&#x60;&#x60;&#x60;
+
+Here are some common options that you can try with the &#x60;ls&#x60; command:
+
+| Option | Description                                                               |
+| ------ | ------------------------------------------------------------------------- |
+| &#x60;-a&#x60;   | list all files, including hidden files                                    |
+| &#x60;-d&#x60;   | list directories only, do not include files                               |
+| &#x60;-h&#x60;   | with &#x60;-l&#x60; and &#x60;-s&#x60;, print sizes like 1K, 234M, 2G                         |
+| &#x60;-l&#x60;   | include attributes like permissions, owner, size, and last-modified date  |
+| &#x60;-S&#x60;   | sort by file size, largest first                                          |
+| &#x60;-t&#x60;   | sort by last-modified date, newest first                                  |
+| &#x60;-r&#x60;   | reverse the sort order                                                    |
+
+To get a long list of all files in &#x60;/etc&#x60;, including any hidden files, enter the following:
+
+&#x60;&#x60;&#x60;
+ls -la /etc
+&#x60;&#x60;&#x60;
+
+Here we combined the options &#x60;-l&#x60; and &#x60;-a&#x60; by using the shorter notation, &#x60;-la&#x60;.
+
+::page{title&#x3D;&quot;Exercise 2 - Creating Files and Directories&quot;}
+
+### 2.1. Create a directory
+
+**&#x60;mkdir&#x60;**
+
+The &#x60;mkdir&#x60; command is used to create a new directory. 
+
+To create a directory named &#x60;scripts&#x60; in your current directory, run the following command:
+
+&#x60;&#x60;&#x60;
+mkdir scripts 
+&#x60;&#x60;&#x60;
+
+Use the &#x60;ls&#x60; command to verify whether the &#x60;scripts&#x60; directory was created:
+
+&#x60;&#x60;&#x60;
+ls 
+&#x60;&#x60;&#x60;
+
+You should see a directory named &#x60;scripts&#x60; listed.
+
+### 2.2. Change your current working directory
+
+**&#x60;cd&#x60;**
+
+To change your present working directory to the &#x60;scripts&#x60; directory, run the following command:
+
+&#x60;&#x60;&#x60;
+cd scripts
+&#x60;&#x60;&#x60;
+
+Now use the &#x60;pwd&#x60; command to verify whether your current working directory has changed as expected:
+
+&#x60;&#x60;&#x60;
+pwd
+&#x60;&#x60;&#x60;
+
+You can enter &#x60;cd&#x60; without any directory name to move back to your home directory:
+
+&#x60;&#x60;&#x60;
+cd
+&#x60;&#x60;&#x60;
+
+Then, enter the &#x60;pwd&#x60; command to verify whether your current working directory has changed:
+
+&#x60;&#x60;&#x60;
+pwd
+&#x60;&#x60;&#x60;
+
+The syntax &#x60;..&#x60; is a shortcut that refers to the parent directory of your current directory. Run the following command to change dictories up one level:
+
+&#x60;&#x60;&#x60;
+cd ..
+&#x60;&#x60;&#x60;
+
+### 2.3. Create an empty file
+
+**&#x60;touch&#x60;**
+
+First, return to your home directory by entering:
+
+&#x60;&#x60;&#x60;
+cd
+&#x60;&#x60;&#x60;
+
+Next, use the &#x60;touch&#x60; command to create an empty file named &#x60;myfile.txt&#x60;:
+
+&#x60;&#x60;&#x60;
+touch myfile.txt
+&#x60;&#x60;&#x60;
+
+Now use the &#x60;ls&#x60; command to verify the creation of &#x60;myfile.txt&#x60;:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+If the file already exists, the &#x60;touch&#x60; command updates the access timestamp, or last-modified date of the file. To see this, enter:
+
+&#x60;&#x60;&#x60;
+touch myfile.txt
+&#x60;&#x60;&#x60;
+
+And use use the &#x60;date&#x60; command to verify the date change:
+
+&#x60;&#x60;&#x60;
+date -r myfile.txt
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Exercise 3 - Managing Files and Directories&quot;}
+
+### 3.1. Search for and locate files
+
+**&#x60;find&#x60;**
+
+The &#x60;find&#x60; command is used to search for files in a directory. You can search for files based on different attributes, such as the file\&#x27;s name, type, owner, size, or timestamp. &lt;br&gt;
+
+The &#x60;find&#x60; command conducts a search of the entire directory tree starting from the given directory name.
+
+For example, the following command finds all &#x60;.txt&#x60; files in the &#x60;/etc&#x60; directory and all of its subdirectories:
+
+&#x60;&#x60;&#x60;
+find /etc -name \&#x27;*.txt\&#x27; 
+&#x60;&#x60;&#x60;
+
+&gt; **Note:** Along with listing all the &#x60;.txt&#x60; files, the terminal may return \&quot;Permission denied\&quot; errors.
+&gt; These errors are normal, as you have limited access permissions on the lab machine.
+
+### 3.2. Remove files
+
+**&#x60;rm&#x60;**
+
+The &#x60;rm&#x60; command is used to delete files, ideally with the &#x60;-i&#x60; option, which creates a prompt to ask for confirmation before every deletion. 
+
+To remove the file &#x60;myfile.txt&#x60;, enter the following command and press &#x60;y&#x60; to confirm deletion, or &#x60;n&#x60; to deny deletion:  
+
+&#x60;&#x60;&#x60;
+rm -i myfile.txt
+&#x60;&#x60;&#x60;
+
+Use the &#x60;ls&#x60; command to verify removal:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+&gt; **Tip:** When you are only removing one file with the &#x60;rm&#x60; command, the &#x60;-i&#x60; option is redundant. But if you want to remove multiple files, for example by using a wildcard to find all filenames matching a pattern, it\&#x27;s best practice to confirm or deny each deletion by including the &#x60;-i&#x60; option. 
+
+&gt; Be careful when deleting files or directories! There is normally no way to restore a deleted file once it is deleted, as there is no trash folder. This is why you should always back up, or *archive*, your important files. You will learn more about archiving files soon.
+
+### 3.3. Move and rename a file
+
+**&#x60;mv&#x60;**
+
+You can use the &#x60;mv&#x60; command to move files from one directory to another and/or rename them.
+
+Before doing so, let\&#x27;s first create a new file called &#x60;users.txt&#x60;:
+
+&#x60;&#x60;&#x60;
+touch users.txt
+&#x60;&#x60;&#x60;
+
+You should always use caution when moving a file. If the target file already exists, it will be overwritten, or replaced, by the source file.
+
+Conveniently, however, when the source and target directories are the same, you can use &#x60;mv&#x60; to rename a file.
+
+To illustrate this, use &#x60;mv&#x60; to rename &#x60;users.txt&#x60; to &#x60;user-info.txt&#x60; by entering the following command:
+
+&#x60;&#x60;&#x60;
+mv users.txt user-info.txt
+&#x60;&#x60;&#x60;
+
+Because the source and target directories are the same (your present working directory), the &#x60;mv&#x60; command will rename the file.
+
+Now use the &#x60;ls&#x60; command to verify the name change:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+Now, you can move &#x60;user-info.txt&#x60; to the &#x60;/tmp&#x60; directory as follows:
+
+&#x60;&#x60;&#x60;
+mv user-info.txt /tmp
+&#x60;&#x60;&#x60;
+
+Use the &#x60;ls&#x60; command twice to verify the move:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+&#x60;&#x60;&#x60;
+ls -l /tmp
+&#x60;&#x60;&#x60;
+
+### 3.4. Copy files
+
+**&#x60;cp&#x60;**
+
+You can use the &#x60;cp&#x60; command to copy &#x60;user-info.txt&#x60;, which is now in your &#x60;/tmp&#x60; directory, to your current working directory:
+
+&#x60;&#x60;&#x60;
+cp /tmp/user-info.txt user-info.txt
+&#x60;&#x60;&#x60;
+
+Use the &#x60;ls&#x60; command to verify that the copy was successful:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+At times, you may want to copy the contents of an existing file into a new one.
+
+The following command copies the content of &#x60;/etc/passwd&#x60; to a file named &#x60;users.txt&#x60; within the current directory:
+
+&#x60;&#x60;&#x60;
+cp /etc/passwd users.txt
+&#x60;&#x60;&#x60;
+
+Again, use the &#x60;ls&#x60; command to verify if the copy was successful:
+
+&#x60;&#x60;&#x60;
+ls
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Practice exercises&quot;}
+
+###### 1. Display the contents of the &#x60;/home&#x60; directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;ls&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+ls /home
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+    
+
+##### 2. Ensure that you are in your home directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use &#x60;cd&#x60; to move to your home directory and then use &#x60;pwd&#x60; to verify.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cd
+pwd
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 3. Create a new directory called &#x60;tmp&#x60; and verify its creation.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;mkdir&#x60; and &#x60;ls&#x60; commands.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+mkdir tmp
+ls
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 4. Create a new, empty file named &#x60;display.sh&#x60; in the &#x60;tmp&#x60; directory, and verify its creation.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;cd&#x60;, &#x60;touch&#x60;, and &#x60;ls&#x60; commands.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cd tmp
+touch display.sh
+ls -l
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 5. Create a copy of &#x60;display.sh&#x60;, called &#x60;report.sh&#x60;, within the same directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;cp&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cp display.sh report.sh
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 6. Move your copied file, &#x60;report.sh&#x60;, up one level in the directory tree to the parent directory. Verify your changes.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;mv&#x60; and &#x60;ls&#x60; commands, and recall the shortcut notation for the relative path to the parent directory of the present working directory.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+mv report.sh ../
+ls 
+ls ../
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 7. Delete the file &#x60;display.sh&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;rm&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+rm -i display.sh
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+##### 8. List the files in &#x60;/etc&#x60; directory in the ascending order of their access time.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;ls&#x60; command with the right options.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+ls -ltr /etc/
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+
+##### 9. Copy the file &#x60;/var/log/bootstrap.log&#x60; to your current directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;cp&#x60; command to copy the file to your current directory &#x60;.&#x60;
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cp /var/log/bootstrap.log .
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+In this lab, you learned that you can use the commands:
+
+- &#x60;pwd&#x60; to get the location of your present working directory
+- &#x60;ls&#x60; to list the files and directories within a directory
+- &#x60;mkdir&#x60; to create a new directory
+- &#x60;cd&#x60; to change your present working directory
+- &#x60;touch&#x60; to create a new file
+- &#x60;find&#x60; to search for and locate files
+- &#x60;rm&#x60; to remove a file
+- &#x60;mv&#x60; to rename or move a file
+- &#x60;cp&#x60; to copy a file
+
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                 |
+| ----------------- | ------- | ----------------- | ---------------------------------- |
+| 2023-05-04        | 3.5    | Benny Li           | Minor formatting changes                        |
+| 2023-04-10        | 3.4     | Nick Yi           | Re-organized exercises                  |
+| 2023-04-14        | 3.3     | Steve Hord        | QA pass with edits                 |
+| 2023-04-10        | 3.2     | Nick Yi           | ID Review                          |
+| 2023-01-11        | 3.1     | Jeff Grossman     | Add new exercises                  |
+| 2023-01-11        | 3.0     | Jeff Grossman     | Split lab and expand content       |
+| 2021-12-02        | 2.1     | Jeff Grossman     | Review and Update lab              |
+| 2021-11-29        | 2.0     | Sam Prokopchuk    | Update lab contents and split      |
+| 2021-05-30        | 1.0     | Ramesh Sannareddy | Created initial version of the lab |
+
+ Copyright (c) 2021-23 IBM Corporation. All rights reserved.--&gt;
+ 
+ &lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-5635-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:46:36Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_new_content%2Flabs%2FM2_Lab_Navigating_and_Managing_Files_and_Directories.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

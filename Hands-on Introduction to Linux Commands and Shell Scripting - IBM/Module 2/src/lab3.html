@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css?version=3.3.2" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css?version=3.3.2" />
+    <link rel="stylesheet" href="./public/css/custom.css?version=3.3.2" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css?version=3.3.2" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js?version=3.3.2"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Hands-on Lab: Access Control Commands&quot;}
+
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+
+
+Estimated time needed: **10** minutes
+
+## Learning Objectives
+
+After completing this lab, you will be able to:
+
+- Understand the various access permissions a file or directory can have
+- View the permissions for all files and directories within a directory
+- Modify permissions for a file by user
+- Describe the effect of changing permissions on a directory
+
+::page{title&#x3D;&quot;About Skills Network Cloud IDE&quot;}
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands on labs for course and project related labs. Theia is an open source IDE (Integrated Development Environment), that can be run on desktop or on the cloud. To complete this lab, you will be using the Cloud IDE based on Theia.
+
+## Important notice about this lab environment
+
+Please be aware that sessions for this lab environment are not persisted. Thus, every time you connect to this lab, a new environment is created for you and any data or files you may have saved in a previous session will be lost. To avoid losing your data, plan to complete these labs in a single session.
+
+::page{title&#x3D;&quot;Exercise 1 - Viewing and modifying file access permissions&quot;}
+
+### 1.1 View file access permissions
+
+#### Required files:
+
+Run the following code to download the required files for this exercise:
+
+&#x60;&#x60;&#x60;
+cd /home/project
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/module%201/usdoi.txt
+&#x60;&#x60;&#x60;
+
+Each file and each directory in your Linux system has permissions set for three permission categories: the \&#x27;user\&#x27;, the \&#x27;group\&#x27;, and \&#x27;all users\&#x27; (or \&#x27;other\&#x27;).
+
+The following permissions are set for each file and directory:
+
+| Permission | Symbol |
+|----------- | ------ |
+|read        | &#x60;r&#x60;    |
+|write       | &#x60;w&#x60;    |
+|execute     | &#x60;x&#x60;    | 
+
+To see the permissions currently set for a file, run the &#x60;ls&#x60; command  with the &#x60;-l&#x60; option. 
+
+For example, to see the permissions for the file named &#x60;usdoi.txt&#x60; in your current directory, enter the following:
+
+&#x60;&#x60;&#x60;
+ls -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+A sample output looks like the following:
+
+&#x60;-rw-r--r-- 1 theia theia 8121 May 31 16:45 usdoi.txt&#x60;
+
+The permissions set here are &#x60;rw-r--r--&#x60;. The &#x60;-&#x60; preceeding these permissions indicates that &#x60;usdoi.txt&#x60; is a file. If it were a directory, you would see a &#x60;d&#x60; instead of the &#x60;-&#x60;.
+
+The first three entries correspond to the current user, the next three correspond to the group, and the last three are for all others. You can see the user has read and write permissions, while the user group only has read permission, and all other users have only read permission. No users have execute permission, as indicated by the &#x60;-&#x60; instead of an &#x60;x&#x60; in the third position for each user category.
+
+### 1.2 Change file access permissions
+
+**&#x60;chmod&#x60;**
+
+The &#x60;chmod&#x60; or *change mode* command lets you change the permissions set for a file.
+
+Specify which permissions to change with a combination of the following characters: &lt;br&gt;
+
+| Option            | Description                                                |
+| ----------------- | ---------------------------------------------------------- |
+| &#x60;r&#x60;, &#x60;w&#x60;, &#x60;x&#x60;  | **Permissions**: read, write, and execute       |
+| &#x60;u&#x60;,&#x60;g&#x60;, &#x60;o &#x60;  | **User categories**: user, group, and all others  |
+| &#x60;+&#x60;, &#x60;-&#x60;          | **Operations**: grant and revoke          |
+
+
+The following command *revokes* read permissions for *all users* (user, group, and other) on the file &#x60;usdoi.txt&#x60;:
+
+&#x60;&#x60;&#x60;
+chmod -r usdoi.txt               
+&#x60;&#x60;&#x60;
+
+You can verify the changed permissions by entering:
+
+&#x60;&#x60;&#x60;
+ls -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+To grant read access to *all users* on &#x60;usdoi.txt&#x60;, enter:&lt;br&gt;
+
+&#x60;&#x60;&#x60;
+chmod +r usdoi.txt                
+&#x60;&#x60;&#x60;
+
+Verify the changed permissions again with the following:
+
+&#x60;&#x60;&#x60;
+ls -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+Now to remove the read permission only for \&#x27;other\&#x27; category, enter the following:
+
+&#x60;&#x60;&#x60;
+chmod o-r usdoi.txt
+&#x60;&#x60;&#x60;
+
+Verify the changed permissions as follows:
+
+&#x60;&#x60;&#x60;
+ls -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Exercise 2 - Understanding directory access permissions&quot;}
+
+### 2.1 View default directory access permissions
+
+Recall the following table, which illustrates the meanings of each permission for directories with examples of allowable operations for a given directory.
+
+| Directory Permission  | Permissible action(s)                          |
+| --------------------- | ---------------------------------------------- |
+| &#x60;r&#x60;                   | list directory contents using &#x60;ls&#x60; command     |
+| &#x60;w&#x60;                   | add/remove files or directories from directory |
+| &#x60;x&#x60;                   | enter directory using &#x60;cd&#x60; command             |
+
+For this exercise, first move to your &#x60;project&#x60; directory and create a new directory called &#x60;test&#x60;:
+
+&#x60;&#x60;&#x60;
+cd /home/project
+mkdir test
+&#x60;&#x60;&#x60;
+
+Check the default permissions that the system sets for your new &#x60;test&#x60; directory:
+
+&#x60;&#x60;&#x60;
+ls -l
+&#x60;&#x60;&#x60;
+
+As you can see from the resulting output:
+
+&#x60;&#x60;&#x60;
+total 12
+drwxr-sr-x 2 theia users 4096 May 15 14:06 test
+-rw-r----- 1 theia users 8121 Sep 28  2022 usdoi.txt
+&#x60;&#x60;&#x60;
+
+You, \&quot;theia\&quot;, as the owner of &#x60;test&#x60;, have read, write, and execute permissions set by default. But all others only have read and execute permissions set and cannot write to your &#x60;test&#x60; directory. This means users outside your group can\&#x27;t add or remove files from &#x60;test&#x60;. They can, however, explore your directory to see what files and directories exist there.
+
+&gt; **Note:** You might be wondering what that &#x60;s&#x60; permission is in the execute slot for your group. The &#x60;s&#x60; stands for \&quot;*special* permission\&quot;. It means that any new files created within the directory will have their group ownership set to be the same as the directory owner. We won\&#x27;t go into this level of detail in this course, but you can learn more about advanced Linux permissions here: [Linux permissions: SUID, SGID, and sticky bit](https://www.redhat.com/sysadmin/suid-sgid-sticky-bit#:~:text&#x3D;Commonly%20noted%20as%20SUID%2C%20the,use%20an%20uppercase%20S%20here.).
+
+Go ahead and verify for yourself that you have permission to run the following commands. Change the directory to your &#x60;test&#x60; directory, create a new directory within it, then return to your parent directory:
+
+&#x60;&#x60;&#x60;
+cd test
+mkdir test2
+cd ../
+&#x60;&#x60;&#x60;
+
+### 2.2 Remove user execute permissions on your &#x60;test&#x60; directory
+
+Remove your user execute permissions on &#x60;test&#x60; using the following command:
+
+&#x60;&#x60;&#x60;
+chmod u-x test
+&#x60;&#x60;&#x60;
+
+Now, what happens when you try to change directories to &#x60;test&#x60;?
+
+&#x60;&#x60;&#x60;
+cd test
+&#x60;&#x60;&#x60;
+
+You get an error message!
+
+&#x60;bash: cd: test: Permission denied&#x60;
+
+As you just removed execute permissions for yourself on your &#x60;test&#x60; directory, you can no longer make it your present working directory. However, you can still \&quot;read\&quot; it with the &#x60;ls&#x60; command:
+
+&#x60;&#x60;&#x60;
+ls -l
+&#x60;&#x60;&#x60;
+
+Even though you have \&quot;write\&quot; permissions set, you can\&#x27;t actually create a new directory within &#x60;test&#x60;, because removing execute permissions overrides write permissions. For example, entering,
+
+&#x60;&#x60;&#x60;
+mkdir test/test3
+&#x60;&#x60;&#x60;
+
+throws an error:
+
+&#x60;mkdir: cannot create directory ‘test/test’: Permission denied&#x60;
+
+This time, try restoring execute permissions on &#x60;test&#x60; and denying write permissions. Then verify your changes:
+
+&#x60;&#x60;&#x60;
+chmod u+x test
+chmod u-w test
+ls -l
+&#x60;&#x60;&#x60;
+
+Now you can go into &#x60;test&#x60;, but you still can\&#x27;t write to it! Entering
+
+&#x60;&#x60;&#x60;
+cd test
+mkdir test_again
+&#x60;&#x60;&#x60;
+
+throws the error:
+
+&#x60;mkdir: cannot create directory ‘test_again’: Permission denied&#x60;
+
+::page{title&#x3D;&quot;Practice exercises&quot;}
+
+#####  1. List the permissions set for the file &#x60;usdoi.txt&#x60; that you downloaded to your project directory at the beginning of the lab.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;ls&#x60; command with the correct option and argument.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cd /home/project
+ls -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+#####  2. Revoke the write permission on &#x60;usdoi.txt&#x60; for the user, and verify your result.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;chmod&#x60; and &#x60;ls&#x60; commands with the right options.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+chmod u-w  usdoi.txt
+ls -l usdoi.txt
+&#x60;&#x60;&#x60;
+
+You should only see read permissions set for all three user categories.
+
+&lt;/details&gt;
+
+#####  3. What happens if you try to delete &#x60;usdoi.txt&#x60; after revoking write permissions for the user?
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;rm&#x60; command to find out.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+If you run the following command:
+
+&#x60;&#x60;&#x60;
+rm usdoi.txt 
+&#x60;&#x60;&#x60;
+
+You should see the following prompt:
+
+&#x60;&#x60;&#x60;
+rm: remove write-protected regular file \&#x27;usdoi.txt\&#x27;?
+&#x60;&#x60;&#x60;
+
+Entering &#x60;y&#x60; will override the write protection and delete the file, which you can verify as follows:
+
+&#x60;&#x60;&#x60;
+ls usdoi.txt
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+#####  4. Create a new directory called &#x60;tmp_dir&#x60; in your home directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;mkdir&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+mkdir tmp_dir
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+#####  5. View the permissions of the newly created directory, &#x60;tmp_dir&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;-d&#x60; and &#x60;-l&#x60; options of the &#x60;ls&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+ls -ld tmp_dir
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+#####  6. Revoke the user write permission for &#x60;tmp_dir&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;u&#x60; and &#x60;w&#x60; options of the &#x60;chmod&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+chmod u-w tmp_dir
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+#####  7. Check whether you can create a subdirectory of &#x60;tmp_dir&#x60; called &#x60;sub_dir&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;cd&#x60; and &#x60;mkdir&#x60; commands or just the &#x60;mkdir&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution 1&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+cd tmp_dir
+mkdir sub_dir
+&#x60;&#x60;&#x60;
+
+You should be able to enter the directory with the &#x60;cd&#x60; command, but you should see a \&quot;permission denied\&quot; error after entering the mkdir command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution 2&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+mkdir tmp_dir/sub_dir
+&#x60;&#x60;&#x60;
+
+Again, you should see a \&quot;permission denied\&quot; error for the mkdir command.
+
+&lt;/details&gt;
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+In this lab, you learned that:
+- Files and directories can have read, write, and execute permissions for the user, group, and others
+- You can view the permissions for all files and directories within a directory by using &#x60;ls -l&#x60;
+- You can modify permissions for a file by using &#x60;chmod&#x60;
+- Changing permissions on a directory will change who can do what to the directory and its files
+
+
+## Authors
+
+Ramesh Sannareddy  
+Sam Prokopchuk  
+Jeff Grossman  
+
+### Other Contributors
+
+Rav Ahuja
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                 |
+| ----------------- | ------- | ----------------- | ---------------------------------- |
+| 2023-04-17        | 3.3     | Steve Hord        | QA pass with edits                  |
+| 2023-04-13        | 3.2     | Nick Yi		      | ID Review					       |
+| 2023-01-12        | 3.1     | Jeff Grossman     | Expand content, add exercises      |
+| 2023-01-11        | 3.0     | Jeff Grossman     | Split lab and expand content       |
+| 2021-12-02        | 2.1     | Jeff Grossman     | Review and Update lab              |
+| 2021-11-29        | 2.0     | Sam Prokopchuk    | Update lab contents and split      |
+| 2021-05-30        | 1.0     | Ramesh Sannareddy | Created initial version of the lab |
+
+ Copyright (c) 2021-23 IBM Corporation. All rights reserved.--&gt;
+ 
+ &lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css?version=3.3.2" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js?version=3.3.2"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js?version=3.3.2"></script>
+<script src="./public/js/render.js?version=3.3.2"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-5632-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:45:18Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_new_content%2Flabs%2FM2_Lab_Access_Control_Commands.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

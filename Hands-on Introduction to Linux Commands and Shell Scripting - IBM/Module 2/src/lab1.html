@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Hands-on Lab: Informational Commands&quot;}
+
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+
+
+Estimated time needed: **30** minutes
+
+## Learning Objectives
+
+After completing this lab, you will be able to use commands to display:
+
+- System and user information
+- User and group identity info
+- Information about running processes and system resource usage 
+- Custom messages
+- The current date and time
+- The reference manual for a command
+
+::page{title&#x3D;&quot;About Skills Network Cloud IDE&quot;}
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands on labs for course and project related labs. Theia is an open source IDE (Integrated Development Environment), that can be run on desktop or on the cloud. To complete this lab, you will be using the Cloud IDE based on Theia.
+
+## Important notice about this lab environment
+
+Please be aware that sessions for this lab environment are not persisted. Thus, every time you connect to this lab, a new environment is created for you and any data or files you may have saved in a previous session will be lost. To avoid losing your data, plan to complete these labs in a single session.
+
+::page{title&#x3D;&quot;Exercise 1 - Informational Commands&quot;}
+
+In this exercise, you will familiarize yourself with useful commands for providing system and user information.
+
+### 1.1.  Display the name of the current user
+
+**&#x60;whoami&#x60;**
+
+Enter the &#x60;whoami&#x60; command to return your current username.
+
+&#x60;&#x60;&#x60;
+whoami
+&#x60;&#x60;&#x60;
+
+It will display the user name as &#x60;theia&#x60; because you are logged into this lab as &#x60;theia&#x60;.
+
+You can get a list of currently logged in users using the command &#x60;who&#x60;, but this command doesn\&#x27;t work in the Theia environment yet.
+
+### 1.2. Get basic information about the operating system
+
+**&#x60;uname&#x60;**
+
+By default the command prints the kernel name. The &#x60;u&#x60; in &#x60;uname&#x60; refers to \&quot;unix-like 0S\&quot;.
+
+&#x60;&#x60;&#x60;
+uname
+&#x60;&#x60;&#x60;
+
+If you enter the command &#x60;uname&#x60;, you will see &#x60;Linux&#x60; printed in the output.
+
+Using the &#x60;-a&#x60; option prints all the system information.
+
+&#x60;&#x60;&#x60;
+uname -a
+&#x60;&#x60;&#x60;
+
+You will see system information listed in the following order: 
+
+- Kernel name
+- Network node hostname
+- Kernel release date
+- Kernel version
+- Machine hardware name
+- Hardware platform
+- Operating system
+
+### 1.3. Obtain the user and group identity information
+
+**&#x60;id&#x60;**
+
+This command displays the user id and group id information of the current user.
+
+&#x60;&#x60;&#x60;
+id
+&#x60;&#x60;&#x60;
+
+It will display the &#x60;uid&#x60; (user id) and &#x60;gid&#x60; (group id) for the user &#x60;theia&#x60;.
+
+### 1.4 Get available disk space
+
+**&#x60;df&#x60;**
+
+The &#x60;df&#x60; command is used to display available disk space.
+
+&#x60;&#x60;&#x60;
+df
+&#x60;&#x60;&#x60;
+
+This command will display available disk space in 512-byte blocks. To get available disk space in a \&quot;human-readable\&quot; format, enter:
+
+&#x60;&#x60;&#x60;
+df -h
+&#x60;&#x60;&#x60;
+
+This will return the available disk space in units like gigabytes and terabytes.
+
+### 1.5. View currently running processes
+
+**&#x60;ps&#x60;**
+
+The &#x60;ps&#x60; command lists each process that is currently running and its &#x60;PID&#x60; (process id).
+
+&#x60;&#x60;&#x60;
+ps
+&#x60;&#x60;&#x60;
+
+However, the output only contains the processes that are owned by you.
+
+By using the &#x60;-e&#x60; option, you can display all of the processes running on the system. The includes processes owned by other users.
+
+&#x60;&#x60;&#x60;
+ps -e
+&#x60;&#x60;&#x60;
+
+### 1.6. Get information on the running processes and system resources
+
+**&#x60;top&#x60;**
+
+The &#x60;top&#x60; or \&quot;table of processes\&quot; command provides a dynamic, real-time view of your system.
+
+&#x60;&#x60;&#x60;
+top
+&#x60;&#x60;&#x60;
+
+The &#x60;top&#x60; command displays a table of detailed information related to the processes or threads which are currently running and managed by the kernel. Additionally, it also provides information related to CPU and memory usage per process.
+
+When you start &#x60;top&#x60;, you\&#x27;ll be presented with the following elements on the main &#x60;top&#x60; screen:
+
+- Summary area - shows information like system uptime, number of users, load average, and overall memory usage
+- Column header - attribute names 
+- Task area - displays the data for each process, or &#x60;PID&#x60;
+
+The output keeps refreshing until you press &#x60;q&#x60; or &#x60;Ctrl&#x60; + &#x60;c&#x60;.
+
+If you want to exit automatically after a specified number of repetitions, use the &#x60;-n&#x60; option as follows:
+
+&#x60;&#x60;&#x60;
+top -n 10
+&#x60;&#x60;&#x60;
+
+You can press the following keys with &#x60;Shift&#x60; while &#x60;top&#x60; is running to sort the table:
+
+| Key | Sorts by        |
+| -- | ---------------- |
+|&#x60;m&#x60; | Memory Usage     |
+|&#x60;p&#x60; | CPU Usage        |
+|&#x60;n&#x60; | Process ID (PID) |
+|&#x60;t&#x60; | Running Time     |
+
+For example, you can find out which process is consuming the most memory by entering &#x60;Shift&#x60; + &#x60;m&#x60;. 
+
+### 1.7. Display Messages
+
+**&#x60;echo&#x60;**
+
+The &#x60;echo&#x60; command displays the given text on the screen. For example, entering: &lt;br&gt;
+
+&#x60;&#x60;&#x60;
+echo &quot;Welcome to the linux lab&quot;
+&#x60;&#x60;&#x60;
+
+prints:
+&#x60;&#x60;&#x60;
+Welcome to the linux lab.
+&#x60;&#x60;&#x60;
+
+These special characters help you better format your output:&lt;br&gt;
+
+| Special Character |  Effect |
+| --- | ----------------------|
+|&#x60;\n&#x60; | Start a new line |
+|&#x60;\t&#x60; | Insert a tab |
+
+Use the &#x60;-e&#x60; option of the &#x60;echo&#x60; command when working with special characters. For example:
+
+&#x60;&#x60;&#x60;
+echo -e &quot;This will be printed \nin two lines&quot;
+&#x60;&#x60;&#x60;
+
+will print:
+
+&#x60;&#x60;&#x60;
+This will be printed
+in two lines
+&#x60;&#x60;&#x60;
+
+### 1.8. Display date and time
+
+**&#x60;date&#x60;**
+
+The &#x60;date&#x60; command displays the current date and time.
+
+&#x60;&#x60;&#x60;
+date
+&#x60;&#x60;&#x60;
+
+It has several options which allow you to display the current date and time in different formats. &lt;br&gt;
+For example, the following command displays the current date in &#x60;mm/dd/yy&#x60; format:
+
+&#x60;&#x60;&#x60;
+date &quot;+%D&quot;
+&#x60;&#x60;&#x60;
+
+Here are some popular format specifiers that you can try out:
+
+| Specifier | Explanation |
+| -- | ------------------------------------------------ |
+| &#x60;%d&#x60; | Displays the day of the month (01 to 31)        |
+| &#x60;%h&#x60; | Displays the abbreviated month name (Jan to Dec)      |
+| &#x60;%m&#x60; | Displays the month of year (01 to 12)       |
+| &#x60;%Y&#x60; | Displays the four-digit year                     |
+| &#x60;%T&#x60; | Displays the time in 24 hour format as HH&amp;#58;MM:SS |
+| &#x60;%H&#x60; | Displays the hour                         |
+
+### 1.9. View the Reference Manual For a Command
+
+**&#x60;man&#x60;**
+
+The &#x60;man&#x60; command displays the user manual for any command that you provide as its argument.
+
+For example, to see the manual page for the &#x60;ls&#x60; command, enter: 
+
+&#x60;&#x60;&#x60;
+man ls
+&#x60;&#x60;&#x60;
+
+Scroll through the command\&#x27;s manual to find any info you may need. When you\&#x27;re done, press &#x60;q&#x60; to quit.
+
+You will sometimes encounter a command that does not have a man page avaible on your system. To see all available &#x60;man&#x60; pages with a brief description of each command, enter:
+
+&#x60;&#x60;&#x60;
+man -k .
+&#x60;&#x60;&#x60;
+
+::page{title&#x3D;&quot;Practice exercises&quot;}
+
+##### 1. Get basic information about the operating system.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;uname&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+uname
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+##### 2. View all running processes on the system.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;ps&#x60; command with the appropriate option to see all processes, not only those owned by you.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+ps -e
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+##### 3. Get the table of processes and sort by memory usage.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use &#x60;top&#x60;, then sort by memory usage by pressing &#x60;Shift&#x60; + &#x60;m&#x60;.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+top
+&#x60;&#x60;&#x60;
+Then press &#x60;Shift&#x60;+&#x60;m&#x60;.
+&lt;/details&gt;
+
+##### 4. Display the current time.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the format option &#x60;%T&#x60; of the &#x60;date&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+date &quot;+%T&quot;
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+##### 5. Using one command, display the messages &#x60;&quot;Hello!&quot;&#x60; and &#x60;&quot;Goodbye!&quot;&#x60; separated by a new line.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;echo&#x60; command with the &#x60;-e&#x60; option and the &#x60;\n&#x60; new line character.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+echo -e &quot;Hello! \nGoodbye!&quot;
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+In this lab, you learned that you can use the commands:
+
+- &#x60;whoami&#x60; to return your username
+- &#x60;uname&#x60; to print the kernel name
+- &#x60;id&#x60; to display the user and group id
+- &#x60;df&#x60; to print available disk space
+- &#x60;ps&#x60; to list running processes and their process id
+- &#x60;top&#x60; to view a real-time table of processes
+- &#x60;echo&#x60; to print given text
+- &#x60;date&#x60; to display the current time and date
+- &#x60;man&#x60; to get the user manual for a command
+
+## Authors
+
+Ramesh Sannareddy  
+Sam Prokopchuk  
+Jeff Grossman  
+
+### Other Contributors
+
+Rav Ahuja
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                 |
+| ----------------- | ------- | ----------------- | ---------------------------------- |
+| 2023-05-04        | 3.2     | Benny Li         | QA Pass                        |
+| 2023-04-10        | 3.1     | Nick Yi           | ID Review                          |
+| 2023-01-11        | 3.0     | Jeff Grossman     | Split lab and expand content       |
+| 2021-12-02        | 2.1     | Jeff Grossman     | Review and Update lab              |
+| 2021-11-29        | 2.0     | Sam Prokopchuk    | Update lab contents and split      |
+| 2021-05-30        | 1.0     | Ramesh Sannareddy | Created initial version of the lab |
+
+ Copyright (c) 2021-23 IBM Corporation. All rights reserved.--&gt;
+ 
+ &lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-5634-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:46:30Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_new_content%2Flabs%2FM2_Lab_Informational_Commands.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>
