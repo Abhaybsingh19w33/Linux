@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt;
+
+# Examples of Pipes
+
+## Learning Objectives
+After completing this reading, you will be able to:
+- Describe pipes
+- Use pipes to combine commands when working with strings and text file contents
+- Use pipes to extract information from URLs
+
+## What are pipes?
+
+Put simply, pipes are commands in Linux which allow you to use the output of one command as the input of another.
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/module%201/images/pipes.jpeg&quot;&gt;&lt;br&gt;
+Pipes &#x60;|&#x60; use the following format:
+
+&#x60;&#x60;&#x60;
+[command 1] | [command 2] | [command 3] ... | [command n]
+&#x60;&#x60;&#x60;
+
+There is no limit to the number of times you can chain pipes in a row!
+
+In this lab, you\&#x27;ll take a closer look at how you can use pipes and filters to solve basic data processing problems.
+
+## Pipe examples
+
+### Combining commands
+
+Let\&#x27;s start with a commonly used example. Recall the following commands:
+
+ - [&#x60;sort&#x60;](https://man7.org/linux/man-pages/man1/sort.1.html) - sorts the lines of text in a file and displays the result
+ - [&#x60;uniq&#x60;](https://man7.org/linux/man-pages/man1/uniq.1.html) - prints a text file with any consecutive, repeated lines collapsed to a single line
+
+With the help of the pipe operator, you can combine these commands to print all the unique lines in a file.
+
+Suppose you have the file &#x60;pets.txt&#x60; with the following contents:
+
+&#x60;&#x60;&#x60;
+$ cat pets.txt
+goldfish
+dog
+cat
+parrot
+dog
+goldfish
+goldfish
+&#x60;&#x60;&#x60;
+
+If you _only_ use &#x60;sort&#x60; on &#x60;pets.txt&#x60;, you get:
+
+&#x60;&#x60;&#x60;
+$ sort pets.txt
+cat
+dog
+dog
+goldfish
+goldfish
+goldfish
+parrot
+&#x60;&#x60;&#x60;
+The file is sorted, but there are duplicated lines of \&quot;dog\&quot; and \&quot;goldfish\&quot;.
+
+On the other hand, if you _only_ use &#x60;uniq&#x60;, you get:
+
+&#x60;&#x60;&#x60;
+$ uniq pets.txt
+goldfish
+dog
+cat
+parrot
+dog
+goldfish
+&#x60;&#x60;&#x60;
+This time, you removed consecutive duplicates, but non-consecutive duplicates of \&quot;dog\&quot; and \&quot;goldfish\&quot; remain.
+
+But by combining the two commands in the correct order - by first using &#x60;sort&#x60; then &#x60;uniq&#x60; - you get back:
+
+&#x60;&#x60;&#x60;
+$ sort pets.txt | uniq
+cat
+dog
+goldfish
+parrot
+&#x60;&#x60;&#x60;
+
+Since &#x60;sort&#x60; sorts all identical items consecutively, and &#x60;uniq&#x60; removes all consecutive duplicates, combining the commands  prints only the unique lines from &#x60;pets.txt&#x60;!
+
+## Applying a command to strings and files
+
+Some commands such as &#x60;tr&#x60; only accept *standard input* - normally text entered from your keyboard - but not strings or filenames.
+
+ - [&#x60;tr&#x60;](https://man7.org/linux/man-pages/man1/tr.1p.html) (translate) - replaces characters in input text
+ &#x60;&#x60;&#x60;
+ tr [OPTIONS] [target characters] [replacement characters]
+ &#x60;&#x60;&#x60;
+
+In cases like this, you can use piping to apply the command to strings and file contents.
+
+With strings, you can use &#x60;echo&#x60; in combination with &#x60;tr&#x60; to replace all the vowels in a string with underscores &#x60;_&#x60;:
+
+&#x60;&#x60;&#x60;
+$ echo &quot;Linux and shell scripting are awesome\!&quot; | tr &quot;aeiou&quot; &quot;_&quot;
+L_n_x _nd sh_ll scr_pt_ng _r_ _w_s_m_!
+&#x60;&#x60;&#x60;
+
+To perform the complement of the operation from the previous example - or to replace all the *consonants* (any letter that is not a vowel) with an underscore - you can use the &#x60;-c&#x60; option:
+
+&#x60;&#x60;&#x60;
+$ echo &quot;Linux and shell scripting are awesome\!&quot; | tr -c &quot;aeiou&quot; &quot;_&quot;
+_i_u__a_____e______i__i___a_e_a_e_o_e_
+&#x60;&#x60;&#x60;
+
+With files, you can use &#x60;cat&#x60; in combination with &#x60;tr&#x60; to change all of the text in a file to uppercase as follows:
+
+&#x60;&#x60;&#x60;
+$ cat pets.txt | tr &quot;[a-z]&quot; &quot;[A-Z]&quot;
+GOLDFISH
+DOG
+CAT
+PARROT
+DOG
+GOLDFISH
+GOLDFISH
+&#x60;&#x60;&#x60;
+
+The possibilities are endless! For example, you could add &#x60;uniq&#x60; to the above pipeline to only return unique lines in the file, like so:
+
+&#x60;&#x60;&#x60;
+$ sort pets.txt | uniq | tr &quot;[a-z]&quot; &quot;[A-Z]&quot;
+CAT
+DOG
+GOLDFISH
+PARROT
+&#x60;&#x60;&#x60;
+
+## Extracting information from JSON Files:
+
+Let\&#x27;s see how you can use this json file to get the current price of Bitcoin (BTC) in USD, by using grep command.
+
+&#x60;&#x60;&#x60;
+{
+  &quot;coin&quot;: {
+    &quot;id&quot;: &quot;bitcoin&quot;,
+    &quot;icon&quot;: &quot;https://static.coinstats.app/coins/Bitcoin6l39t.png&quot;,
+    &quot;name&quot;: &quot;Bitcoin&quot;,
+    &quot;symbol&quot;: &quot;BTC&quot;,
+    &quot;rank&quot;: 1,
+    &quot;price&quot;: 57907.78008618953,
+    &quot;priceBtc&quot;: 1,
+    &quot;volume&quot;: 48430621052.9856,
+    &quot;marketCap&quot;: 1093175428640.1146,
+    &quot;availableSupply&quot;: 18877868,
+    &quot;totalSupply&quot;: 21000000,
+    &quot;priceChange1h&quot;: -0.19,
+    &quot;priceChange1d&quot;: -0.4,
+    &quot;priceChange1w&quot;: -9.36,
+    &quot;websiteUrl&quot;: &quot;http://www.bitcoin.org&quot;,
+    &quot;twitterUrl&quot;: &quot;https://twitter.com/bitcoin&quot;,
+    &quot;exp&quot;: [
+      &quot;https://blockchair.com/bitcoin/&quot;,
+      &quot;https://btc.com/&quot;,
+      &quot;https://btc.tokenview.com/&quot;
+    ]
+  }
+}
+&#x60;&#x60;&#x60;
+
+Copy the above output in a file and name it as &#x60;Bitcoinprice.txt&#x60;.
+
+The JSON field you want to grab here is &#x60;&quot;price&quot;: [numbers].[numbers]&quot;&#x60;. To get this, you can use the following &#x60;grep&#x60; command to extract it from the JSON text:
+
+&#x60;&#x60;&#x60;
+grep -oE &quot;\&quot;price\&quot;\s*:\s*[0-9]*?\.[0-9]*&quot;
+&#x60;&#x60;&#x60;
+
+Let\&#x27;s break down the details of this statement:
+
+ - &#x60;-o&#x60; tells &#x60;grep&#x60; to _only_ return the matching portion
+ - &#x60;-E&#x60; tells &#x60;grep&#x60; to be able to use extended regex symbols such as &#x60;?&#x60;
+ - &#x60;\&quot;price\&quot;&#x60; matches the string &#x60;&quot;price&quot;&#x60;
+ - &#x60;\s*&#x60; matches any number (including 0) of whitespace (&#x60;\s&#x60;) characters
+ - &#x60;:&#x60; matches &#x60;:&#x60;
+ - &#x60;[0-9]*&#x60; matches any number of digits (from 0 to 9)
+ - &#x60;?\.&#x60; optionally matches a &#x60;.&#x60;
+
+Use the cat command to get the output of the JSON file and pipe it with the grep command to get the required output.
+
+&#x60;&#x60;&#x60;
+cat Bitcoinprice.txt | grep -oE &quot;\&quot;price\&quot;\s*:\s*[0-9]*?\.[0-9]*&quot;
+&#x60;&#x60;&#x60;
+
+You can also extract information directly from URLs and retreive any specific data using such grep commands. 
+
+
+&lt;details&gt;
+
+&lt;summary&gt;Click here to see the process of extracting information directly from URLs and retreiving specific data: &lt;/summary&gt;
+
+&lt;br&gt;
+
+#### Extracting information from URLs:
+
+1. Open your web browser and navigate to the following link: https://openapi.coinstats.app. You will be redirected to the login page, as shown below:
+	
+![](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/loginpage.png)
+
+2. Enter your email address and password, then proceed to verify your email. After verification, you will be redirected to the dashboard.
+
+3. On the dashboard, locate and click the &#x60;Generate API Key&#x60; button. This will generate an API key, as displayed below. Ensure to save this API key.
+
+![](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/apikey.png)
+
+4. Next,click on the &#x60;API Docs&#x60; section on the left side of the dashboard.
+
+![](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/apidocs.png)
+
+5. By clicking on it, you will be directed to the page shown below. Click on the &#x60;/coins&#x60; endpoint.
+
+![main-page.png](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/A5LKXQcOrB2SN_Mkr6fpiQ/main-page.png)
+
+6. On the right corner of the page that opens, you will find a curl command for retrieving the output in JSON format. To test this functionality, click on the &#x60;Try it&#x60; button.
+
+&gt; Note: This process works only when you enter the generated API Key into the text box named header requesting Authorization.
+
+7. After Authorization, the output will be generated in JSON format, as below:
+
+![](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/try-API-output.png)
+
+
+8. Utilize the &#x27;grep&#x27; command, following the guidelines outlined earlier, to fetch the necessary data.
+
+&lt;/details&gt;
+
+
+## Summary
+In this reading, you learned that:
+- Pipes are commands in Linux which allow you to use the output of one command as the input of another
+- You can combine commands such as &#x60;sort&#x60; and &#x60;uniq&#x60; to organize strings and text file contents
+- You can pipe the output of a &#x60;curl&#x60; command to &#x60;grep&#x60; to extract components of URL data
+
+## Authors
+Jeff Grossman
+Sam Prokopchuk
+&lt;footer&gt; &lt;img align&#x3D;&quot;left&quot; src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/MXeMas_DKhtICLxUfsJi9w.png&quot;&gt; &lt;/footer&gt;
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description       |
+| ----------------- | ------- | ----------------- | ------------------------ |
+| 2024-04-24    | 1.6   | K Sundararajan  | Small update in instructions based on Sanity testing results  |
+| 2024-01-09    | 1.5   | Zehra Afzal, K Sundararajan  | Content corrected after deprecation of Bitcoin API  |
+| 2023-05-23        | 1.4     | Benny Li          | QA pass               |
+| 2023-04-27        | 1.3     | Nick Yi           | QA pass               |
+| 2023-04-14        | 1.2     | Nick Yi           | ID Review                |
+| 2023-03-08        | 1.1     | Jeff Grossman     | Added new content               |
+| 2021-11-09        | 1.0     | Sam Prokopchuk    | Initial version created                |
+
+Copyright (c) 2024 IBM Corporation. All rights reserved.   --&gt;</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;branch&quot;:&quot;lab-5629-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T07:44:59Z&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-24T12:29:22Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/module%201/reading_examples_of_pipes.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs/module%201/reading_examples_of_pipes.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/module%201/reading_examples_of_pipes.md.wav","isValid":true,"isOutdated":true}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

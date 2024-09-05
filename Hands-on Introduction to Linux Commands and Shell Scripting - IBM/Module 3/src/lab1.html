@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">---
+markdown-version: v1
+title: labs/module 1/introducing-linux-terminal.copy
+branch: lab-103-instruction
+version-history-start-date: \&#x27;2022-04-29T15:42:33.000Z\&#x27;
+tool-type: theia
+---
+
+::page{title&#x3D;&quot;Hands-on Lab:  Getting Started with Shell Scripting&quot;}
+
+&lt;p &gt;
+    &lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/p&gt;
+
+
+Estimated time needed: **30** minutes
+
+## Learning Objectives
+
+After completing this lab, you will be able to:
+
+-   Create and execute a simple Bash shell script
+-   Implement the shebang directive in a Bash shell script
+
+::page{title&#x3D;&quot;About Skills Network Cloud IDE&quot;}
+
+Skills Network Cloud IDE (based on Theia and Docker) provides an environment for hands-on labs for course and project related labs. Theia is an open-source IDE (Integrated Development Environment) that can be run on a desktop or on the cloud. To complete this lab, we will be using the Cloud IDE based on Theia running in a Docker container.
+
+## Important notice about this lab environment
+
+Please be aware that sessions for this lab environment are not persisted. Every time you connect to this lab, a new environment is created for you. Any data you may have saved in the earlier session would get lost. Plan to complete these labs in a single session to avoid losing your data.
+
+::page{title&#x3D;&quot;Exercise 1 - Create and execute a basic shell script&quot;}
+
+In this exercise, you will create a simple script which will do the following:
+
+- Accept a user name
+- Print a welcome message to the user
+
+You will also add comments to the script, which are lines starting with &#x60;#&#x60;. Comments are not executed by the shell.
+
+When used appropriately, comments can make a shell script more readable and help in debugging the script.
+
+
+### 1.1. Create a new script file
+
+Step 1: On the menu on the lab screen, use **File-&gt;New File** to create a new file.
+
+![File menu highlights New File](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Bash%20Scripting/Lab%20-%20Bash%20Scripting/images/file_new.png)!
+
+Step 2: Name it as &#x60;greet.sh&#x60; and click **OK**
+
+![New file name entered and OK button is highlighted](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Bash%20Scripting/Lab%20-%20Bash%20Scripting/images/file_name.png)
+
+Step 3: Copy and paste the following lines into the newly created file.
+
+&#x60;&#x60;&#x60;
+# This script accepts the user\&#x27;s name and prints 
+# a message greeting the user
+
+# Print the prompt message on screen
+echo -n &quot;Enter your name :&quot;	  	
+
+# Wait for user to enter a name, and save the entered name into the variable \&#x27;name\&#x27;
+read name				
+
+# Print the welcome message followed by the name	
+echo &quot;Welcome $name&quot;
+
+# The following message should print on a single line. Hence the usage of \&#x27;-n\&#x27;
+echo -n &quot;Congratulations! You just created and ran your first shell script &quot;
+echo &quot;using Bash on IBM Skills Network&quot;
+
+&#x60;&#x60;&#x60;
+
+
+Step 4: Save the file using the **File-&gt;Save** menu option.
+
+
+### 1.2. Execute the script
+
+Open a new terminal by clicking on the menu bar and selecting **Terminal**-&gt;**New Terminal**, as in the image below.
+
+![Terminal menu points to New Terminal](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Bash%20Scripting/Lab%20-%20Bash%20Scripting/images/new-terminal.png)
+
+This will open a new terminal at the bottom of the screen.
+
+![Terminal screen points to New terminal at lower portion of screen](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Bash%20Scripting/Lab%20-%20Bash%20Scripting/images/terminal_bottom_screen.png)
+
+Run the commands below in the newly opened terminal.
+
+Let\&#x27;s check the permissions for this new file by entering the following:
+
+&#x60;&#x60;&#x60;
+ls -l greet.sh
+&#x60;&#x60;&#x60;
+
+If the file exists and has read permissions, run the following command to execute it:
+
+&#x60;&#x60;&#x60;
+bash greet.sh
+&#x60;&#x60;&#x60;
+
+The message &#x60;Enter your name :&#x60;  appears on screen.
+
+Type your name and press the &#x60;Enter&#x60; key.
+
+You should now see the welcome messages displayed on screen with your entered name.
+
+![Welcome message with your name and congratulations message](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Bash%20Scripting/Lab%20-%20Bash%20Scripting/images/greet_output.png)
+
+Congratulations! You have succesfully executed your first Bash shell script.
+
+
+::page{title&#x3D;&quot;Exercise 2 - Using a shebang line&quot;}
+
+In this exercise, you will edit the &#x60;greet.sh&#x60; script you created in the previous exercise by adding a \&#x27;shebang\&#x27; and making it an executable file.
+
+This is done to ensure that the name of the script can be used like a command. Adding this special shebang line lets you specify the path to the interpreter of the script - in this case, the *Bash shell*.
+
+Follow the steps below to learn how to add a shebang to your script.
+
+### 2.1. Find the path to the interpreter
+
+The &#x60;which&#x60; command helps you find out the path of the command &#x60;bash&#x60;.
+
+&#x60;&#x60;&#x60;
+which bash
+&#x60;&#x60;&#x60;
+
+In this case, it returns the path &#x60;/bin/bash&#x60;.
+
+
+### 2.2. Edit the script &#x60;greet.sh&#x60; and add the shebang line to the script
+
+Open the file and add the following line at the beginning of the script:
+
+&#x60;&#x60;&#x60;
+#! /bin/bash
+&#x60;&#x60;&#x60;
+
+
+The script should now look like the following:
+
+![Script with the shebang line that you added](https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Bash%20Scripting/Lab%20-%20Bash%20Scripting/images/code_with_shabang.png)
+
+### 2.3. Check the permissions of the script
+
+One more step needs to be completed to make &#x60;greet.sh&#x60; completely executable by name. &lt;br&gt;
+To add the execute permission for the user on &#x60;greet.sh&#x60;, enter the following: 
+
+&#x60;&#x60;&#x60;
+chmod +x greet.sh
+&#x60;&#x60;&#x60;
+
+Verify whether the execute permission is granted.
+
+&gt; **Tip**: Generally it\&#x27;s not a good idea to grant permissions to a script for all users, groups, and others. It\&#x27;s more appropriate to limit the execute permission to only the owner, or the user who created the file (you).
+
+To change permissions for &#x60;greet.sh&#x60; to make the file executable for the user, run the command below:
+
+&#x60;&#x60;&#x60;
+chmod u+x greet.sh
+&#x60;&#x60;&#x60;
+
+Verify the permissions using the command below:
+
+&#x60;&#x60;&#x60;
+ls -l greet.sh
+&#x60;&#x60;&#x60;
+
+If you wish to grant execute permission to everyone, you need to run the command &#x60;chmod +x greet.sh&#x60;.
+
+
+### 2.4. Execute the script.
+
+Enter the command given below to run the shell script.
+
+&#x60;&#x60;&#x60;
+./greet.sh
+&#x60;&#x60;&#x60;
+
+
+The &#x60;.&#x60; here refers to the current directory. You are telling Linux to execute the script &#x60;greet.sh&#x60; and that it can be found in the current directory.
+
+
+::page{title&#x3D;&quot;Practice exercise&quot;}
+
+###### 1.  Create a script named &#x60;greetnew.sh&#x60; that takes the first and last names of the user, saves them in corresponding variables &#x60;firstname&#x60; and &#x60;lastname&#x60;, and prints a welcome message, such as &#x60;&quot;Hello &lt;firstname&gt; &lt;lastname&gt;&quot;&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;read&#x60; command and &#x60;echo&#x60; commands. Write comments. Make sure to add the shebang line.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt; Step 1: Create a new file named &#x60;greetnew.sh&#x60;.
+
+&gt; Step 2: Add the following lines to the file:
+
+&#x60;&#x60;&#x60;
+#! /bin/bash
+
+# This script accepts the user\&#x27;s name and prints 
+# a message greeting the user
+
+# Print the prompt message on screen
+echo -n &quot;Enter your firstname :&quot;	  	
+
+# Wait for user to enter a name, and save the entered name into the variable \&#x27;name\&#x27;
+read firstname				
+
+# Print the prompt message on screen
+echo -n &quot;Enter your lastname :&quot;	  	
+
+# Wait for user to enter a name, and save the entered name into the variable \&#x27;name\&#x27;
+read lastname	
+
+# Print the welcome message followed by the name	
+echo &quot;Hello $firstname $lastname.&quot;
+
+&#x60;&#x60;&#x60;
+
+&gt; Step 3: Save the file.
+
+&gt; Step 4: Add the execute permission to &#x60;greetnew.sh&#x60; for the owner:
+
+&#x60;&#x60;&#x60;
+chmod u+x greetnew.sh
+&#x60;&#x60;&#x60;
+
+&gt; Step 5: Execute the file from the command prompt using the following command:
+
+&#x60;&#x60;&#x60;
+./greetnew.sh
+&#x60;&#x60;&#x60;
+
+
+&lt;/details&gt;
+	
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+In this lab, you learned how to:
+- Create and execute a simple Bash shell script
+- Implement the shebang directive &#x60;#! /bin/bash&#x60; in a Bash shell script
+
+## Authors
+
+Ramesh Sannareddy
+
+### Other Contributors
+
+Rav Ahuja
+&lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+&lt;!--
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By         | Change Description                               |
+| ----------------- | ------- | ------------------ | ------------------------------------------------ |
+| 2023-04-19        | 1.4     | Steve Hord         | QA pass with edits                              |
+| 2023-04-18        | 1.3     | Nick Yi            | ID Review                                        |
+| 2023-02-12        | 1.2     | Jeff Grossman      | Add context, logo, edit grammar and formatting   |
+| 2022-09-12        | 1.1     | Lavanya Rajalingam | Updated Image                                    |
+| 2021-05-30        | 1.0     | Ramesh Sannareddy  | Created initial version of the lab               |
+
+
+ Copyright (c) 2021-23 IBM Corporation. All rights reserved.--&gt;
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-6074-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-18T18:08:08Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2Fv4_drafts%2Flabs%2FBash_Scripting%2FLab_-_Bash_Scripting%2FGetting.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>
