@@ -8,3 +8,7 @@ In this module, you will learn about the basics of Linux. You will be able to su
 ## Module 2
 ### Introduction to Linux Commands
 In this module, you will learn how to use common Linux commands. You will learn what a shell and shell commands are, and how to use commands to do various tasks in Linux. This module will teach you how to use informational commands to find relevant information about your system, navigation commands to navigate files and directories, and management commands to create, delete, copy, and move files and directories. You will also learn to sort and view files in useful ways and extract specific lines and fields from your files. You will be able to use networking commands to examine your network configuration and evaluate, identify, and retrieve data from URLs. Finally, this module will cover file archiving and compression commands.
+
+## Module 3
+### Introduction to Shell Scripting
+In this module, you will learn the basics of shell scripting. You will learn what a script is and when to use scripts. You will be able to describe the shebang interpreter directive and create and run a simple shell script. Additionally, this module will teach you how to use pipes and filters and set shell and environment variables. By the end of this module, you will also be able to list features of Bash shell scripting and use crontab to schedule cron jobs, understand the cron syntax, and view and remove cron jobs.

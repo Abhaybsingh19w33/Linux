@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt;
+
+# Module 3 Cheat Sheet - Introduction to Shell Scripting
+
+### Bash shebang   
+--- 
+&#x60;&#x60;&#x60;
+#!/bin/bash
+&#x60;&#x60;&#x60;
+
+### Get the path to a command
+---
+&#x60;&#x60;&#x60;
+which bash
+&#x60;&#x60;&#x60;
+
+### Pipes, filters, and chaining   
+--- 
+##### Chain filter commands together using the pipe operator:
+&#x60;&#x60;&#x60;
+ls | sort -r
+&#x60;&#x60;&#x60;  
+ 
+##### Pipe the output of manual page for &#x60;ls&#x60; to &#x60;head&#x60; to display the first 20 lines:   
+&#x60;&#x60;&#x60;
+man ls | head -20
+&#x60;&#x60;&#x60;
+
+##### Use a pipeline to extract a column of names from a csv and drop duplicate names:
+&#x60;&#x60;&#x60;
+cut -d &quot;,&quot; -f1 names.csv | sort | uniq
+&#x60;&#x60;&#x60;
+ 
+### Working with shell and environment variables:  
+--- 
+##### List all shell variables:   
+&#x60;&#x60;&#x60;
+set
+&#x60;&#x60;&#x60;
+ 
+##### Define a shell variable called &#x60;my_planet&#x60; and assign value &#x60;Earth&#x60; to it:   
+&#x60;&#x60;&#x60;
+my_planet&#x3D;Earth
+&#x60;&#x60;&#x60;  
+ 
+##### Display value of a shell variable:   
+&#x60;&#x60;&#x60;
+echo $my_planet
+&#x60;&#x60;&#x60;
+
+##### Reading user input into a shell variable at the command line:  
+&#x60;&#x60;&#x60;
+read first_name
+&#x60;&#x60;&#x60;
+
+&gt; **Tip:** Whatever text string you enter after running this command gets stored as the value of the variable &#x60;first_name&#x60;.  
+ 
+##### List all environment variables:   
+&#x60;&#x60;&#x60;
+env
+&#x60;&#x60;&#x60;
+ 
+##### Environment vars: define/extend variable scope to child processes:   
+&#x60;&#x60;&#x60;
+export my_planet
+export my_galaxy&#x3D;&#x27;Milky Way&#x27;
+&#x60;&#x60;&#x60;
+
+ 
+### Metacharacters   
+--- 
+##### Comments &#x60;#&#x60;:   
+&#x60;&#x60;&#x60;
+# The shell will not respond to this message
+&#x60;&#x60;&#x60;
+ 
+##### Command separator &#x60;;&#x60;:   
+&#x60;&#x60;&#x60;
+echo &#x27;here are some files and folders&#x27;; ls
+&#x60;&#x60;&#x60;
+ 
+##### File name expansion wildcard &#x60;*&#x60;:
+&#x60;&#x60;&#x60;
+ls *.json
+&#x60;&#x60;&#x60;
+ 
+##### Single character wildcard &#x60;?&#x60;:    
+&#x60;&#x60;&#x60;
+ls file_2021-06-??.json
+&#x60;&#x60;&#x60;
+ 
+### Quoting   
+--- 
+##### Single quotes &#x60;&#x27;&#x27;&#x60; - interpret literally:   
+&#x60;&#x60;&#x60;
+echo &#x27;My home directory can be accessed by entering: echo $HOME&#x27;
+&#x60;&#x60;&#x60;
+ 
+##### Double quotes &#x60;&quot;&quot;&#x60; - interpret literally, but evaluate metacharacters:   
+&#x60;&#x60;&#x60;
+echo &quot;My home directory is $HOME&quot;
+&#x60;&#x60;&#x60;
+ 
+##### Backslash &#x60;\&#x60; - escape metacharacter interpretation:   
+&#x60;&#x60;&#x60;
+echo &quot;This dollar sign should render: \$&quot;
+&#x60;&#x60;&#x60;
+ 
+### I/O Redirection    
+--- 
+ 
+##### Redirect output to file and overwrite any existing content:   
+&#x60;&#x60;&#x60;
+echo &#x27;Write this text to file x&#x27; &gt; x
+&#x60;&#x60;&#x60;
+ 
+##### Append output to file:    
+&#x60;&#x60;&#x60;
+echo &#x27;Add this line to file x&#x27; &gt;&gt; x
+&#x60;&#x60;&#x60;
+ 
+##### Redirect standard error to file:    
+&#x60;&#x60;&#x60;
+bad_command_1 2&gt; error.log
+&#x60;&#x60;&#x60;
+ 
+##### Append standard error to file:   
+&#x60;&#x60;&#x60;
+bad_command_2 2&gt;&gt; error.log
+&#x60;&#x60;&#x60;
+ 
+##### Redirect file contents to standard input:   
+&#x60;&#x60;&#x60;
+$ tr “[a-z]” “[A-Z]” &lt; a_text_file.txt
+&#x60;&#x60;&#x60;
+ 
+##### The input redirection above is equivalent to:   
+&#x60;&#x60;&#x60;
+$cat a_text_file.txt | tr “[a-z]” “[A-Z]”
+&#x60;&#x60;&#x60;
+ 
+### Command Substitution     
+--- 
+#####  Capture output of a command and echo its value:   
+&#x60;&#x60;&#x60;
+THE_PRESENT&#x3D;$(date)
+echo &quot;There is no time like $THE_PRESENT&quot;
+&#x60;&#x60;&#x60;
+#####  Capture output of a command and echo its value:   
+&#x60;&#x60;&#x60;
+echo &quot;There is no time like $(date)&quot;
+&#x60;&#x60;&#x60;
+### Command line arguments   
+--- 
+&#x60;&#x60;&#x60;
+./My_Bash_Script.sh arg1 arg2 arg3
+&#x60;&#x60;&#x60;
+ 
+ 
+### Batch vs. concurrent modes  
+--- 
+#####  Run commands sequentially:   
+&#x60;&#x60;&#x60;
+start&#x3D;$(date); ./MyBigScript.sh ; end&#x3D;$(date)
+&#x60;&#x60;&#x60;
+ 
+#####  Run commands in parallel:   
+&#x60;&#x60;&#x60;
+./ETL_chunk_one_on_these_nodes.sh  &amp; ./ETL_chunk_two_on_those_nodes.sh
+&#x60;&#x60;&#x60;
+ 
+
+### Scheduling jobs with cron 
+--- 
+
+##### Open crontab editor:   
+&#x60;&#x60;&#x60;
+crontab -e
+&#x60;&#x60;&#x60;
+ 
+##### Job scheduling syntax:   
+&#x60;&#x60;&#x60;
+m  h  dom  mon  dow   command
+&#x60;&#x60;&#x60;
+&gt; (minute, hour, day of month, month, day of week)
+
+&gt; **Tip:** You can use the &#x60;*&#x60; wildcard to mean \&quot;any\&quot;. 
+ 
+##### Append the date/time to a file every Sunday at 6:15 pm:    
+&#x60;&#x60;&#x60;
+15 18 * * 0 date &gt;&gt; sundays.txt
+&#x60;&#x60;&#x60;
+ 
+##### Run a shell script on the first minute of the first day of each month:   
+&#x60;&#x60;&#x60;
+1  0 1 * * ./My_Shell_Script.sh
+&#x60;&#x60;&#x60;
+ 
+##### Back up your home directory every Monday at 3:00 am:  
+&#x60;&#x60;&#x60;
+0 3 * * 1  tar -cvf my_backup_path\my_archive.tar.gz $HOME\
+&#x60;&#x60;&#x60;
+ 
+##### Deploy your cron job:   
+&gt; Close the crontab editor and save the file.
+ 
+##### List all cron jobs:    
+&#x60;&#x60;&#x60;
+crontab -l
+&#x60;&#x60;&#x60;
+
+### Conditionals 
+##### &#x60;if&#x60;-&#x60;then&#x60;-&#x60;else&#x60; syntax:
+&#x60;&#x60;&#x60;
+if [[ $# &#x3D;&#x3D; 2 ]]
+then
+  echo &quot;number of arguments is equal to 2&quot;
+else
+  echo &quot;number of arguments is not equal to 2&quot;
+fi
+&#x60;&#x60;&#x60;
+##### \&#x27;and\&#x27; operator &#x60;&amp;&amp;&#x60;:
+&#x60;&#x60;&#x60;
+if [ condition1 ] &amp;&amp; [ condition2 ]
+&#x60;&#x60;&#x60;
+##### \&#x27;or\&#x27; operator &#x60;||&#x60;:
+&#x60;&#x60;&#x60;
+if [ condition1 ] || [ condition2 ]
+&#x60;&#x60;&#x60;
+### Logical operators
+| Operator  | Definition  |
+| ------------ | ------------ |
+| &#x60;&#x3D;&#x3D;&#x60; | is equal to      |
+| &#x60;!&#x3D;&#x60; | is not equal to  |
+| &#x60;&lt;&#x60;  | is less than     |
+| &#x60;&gt;&#x60;  | is greater than     |
+| &#x60;&lt;&#x3D;&#x60; | is less than or equal to    |
+| &#x60;&gt;&#x3D;&#x60; | is greater than or equal to |
+
+### Arithmetic calculations
+##### Integer arithmetic notation:
+&#x60;&#x60;&#x60;
+$(())
+&#x60;&#x60;&#x60;
+##### Basic arithmetic operators:
+| Symbol | Operation      | 
+| ------ | -------------  |
+| &#x60;+&#x60;      | addition       |
+| &#x60;-&#x60;      | subtraction    |
+| &#x60;*&#x60;      | multiplication |
+| &#x60;/&#x60;      | division       |
+
+
+##### Display the result of adding 3 and 2:
+&#x60;&#x60;&#x60;
+echo $((3+2))
+&#x60;&#x60;&#x60;
+
+##### Negate a number:
+&#x60;&#x60;&#x60;
+echo $((-1*-2))
+&#x60;&#x60;&#x60;
+
+
+### Arrays
+##### Declare an array that contains items &#x60;1&#x60;, &#x60;2&#x60;, &#x60;&quot;three&quot;&#x60;, &#x60;&quot;four&quot;&#x60;, and &#x60;5&#x60;:	
+&#x60;&#x60;&#x60;
+my_array&#x3D;(1 2 &quot;three&quot; &quot;four&quot; 5)
+&#x60;&#x60;&#x60;
+##### Add an item to your array:
+&#x60;&#x60;&#x60;
+my_array+&#x3D;&quot;six&quot;
+my_array+&#x3D;7
+&#x60;&#x60;&#x60;
+
+##### Declare an array and load it with lines of text from a file:
+&#x60;&#x60;&#x60;
+my_array&#x3D;($(echo $(cat column.txt)))
+&#x60;&#x60;&#x60;
+
+### &#x60;for&#x60; loops
+##### Use a &#x60;for&#x60; loop to iterate over values from 1 to 5:
+
+&#x60;&#x60;&#x60;
+for i in {0..5}; do
+    echo &quot;this is iteration number $i&quot;
+done
+&#x60;&#x60;&#x60;
+
+##### Use a &#x60;for&#x60; loop to print all items in an array:
+&#x60;&#x60;&#x60;
+for item in ${my_array[@]}; do
+  echo $item
+done
+&#x60;&#x60;&#x60;
+##### Use array indexing within a &#x60;for&#x60; loop, assuming the array has seven elements:
+
+&#x60;&#x60;&#x60;
+for i in {0..6}; do
+    echo ${my_array[$i]}
+done
+&#x60;&#x60;&#x60;
+
+---
+
+## Authors
+
+Jeff Grossman  
+Sam Propupchuk
+
+### Other Contributors
+
+Rav Ahuja
+&lt;footer&gt; &lt;img align&#x3D;&quot;left&quot; src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/MXeMas_DKhtICLxUfsJi9w.png&quot;&gt; &lt;/footer&gt;
+&lt;!--
+
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                 |
+| ----------------- | ------- | ----------------- | ---------------------------------- |
+| 2023-06-07        | 2.0     | Jeff Grossman     | Added advanced scripting examples  |
+| 2023-05-17        | 1.3     | Nick Yi           | Added content                      |
+| 2023-05-09        | 1.2     | Nick Yi           | Add code blocks, update title      |
+| 2023-04-26        | 1.1     | Nick Yi           | ID Review                          |
+| 2023-02-14        | 1.0     | Jeff Grossman     | Update to reflect module content   |
+
+ 
+© Copyright IBM Corporation 2023. All rights reserved.  --&gt; 
+
+ 
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;branch&quot;:&quot;lab-5668-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-12T08:12:22Z&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-08T12:38:17Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M3_Cheat_Sheet_Intro_to_Shell_Scripting.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs/v4_new_content/labs/readings/M3_Cheat_Sheet_Intro_to_Shell_Scripting.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/v4_new_content/labs/readings/M3_Cheat_Sheet_Intro_to_Shell_Scripting.md.wav","isValid":true,"isOutdated":true}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

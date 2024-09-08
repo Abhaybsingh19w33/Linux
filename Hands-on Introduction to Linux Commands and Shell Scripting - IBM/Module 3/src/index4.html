@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;"># Introduction to Advanced Bash Scripting
+
+&lt;!--&lt;center&gt;
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;300&quot; alt&#x3D;&quot;cognitiveclass.ai logo&quot;&gt;
+&lt;/center&gt;--&gt; &lt;br&gt;
+
+Estimated time needed: **5** minutes
+
+In the hands-on lab portion of the final project, you will be using more advanced scripting commands and concepts that the course has not covered yet. This reading will familiarize you with these more advanced concepts, so you can complete the lab with confidence.
+
+## Objectives
+After completing this reading, you will be able to create Bash scripts that:
+- use conditional statements to run a set of commands only if a specified condition is &#x60;true&#x60;
+- apply logical operators to create &#x60;true&#x60;/&#x60;false&#x60; comparisons
+- perform basic arithmetic calculations
+- create list-like arrays and access their elements
+- implement &#x60;for&#x60; loops to execute operations repeatedly, based on a looping index 
+
+## Conditionals
+**Conditionals**, or &#x60;if&#x60; statements, are a way of telling a script to do something only under a specific condition.
+
+Bash script conditionals use the following &#x60;if&#x60;-&#x60;then&#x60;-&#x60;else&#x60; syntax:
+
+&#x60;&#x60;&#x60;
+if [ condition ]
+then
+    statement_block_1  
+else
+    statement_block_2  
+fi
+&#x60;&#x60;&#x60;
+
+If the &#x60;condition&#x60; is &#x60;true&#x60;, then Bash executes the statements in &#x60;statement_block_1&#x60; before exiting the conditional block of code. After exiting, it will continue to run any commands after the closing &#x60;fi&#x60;. 
+
+Alternatively, if the &#x60;condition&#x60; is &#x60;false&#x60;, Bash instead runs the statements in &#x60;statement_block_2&#x60; under the &#x60;else&#x60; line, then exits the conditional block and continues to run commands after the closing &#x60;fi&#x60;.
+
+&gt;**Tips:**
+&gt;- You must always put spaces around your condition within the square brackets &#x60;[&#x60; &#x60;]&#x60;. 
+&gt;- Every &#x60;if&#x60; condition block must be paired with a &#x60;fi&#x60; to tell Bash where the condition block ends.  
+&gt;- The &#x60;else&#x60; block is optional but recommended. If the condition evaluates to &#x60;false&#x60; without an &#x60;else&#x60; block, then nothing happens within the &#x60;if&#x60; condition block. Consider options such as echoing a comment in &#x60;statement_block_2&#x60; to indicate that the condition was evaluated as &#x60;false&#x60;.
+
+In the following example, the condition is checking whether the number of command-line arguments read by some Bash script, &#x60;$#&#x60;, is equal to 2.
+
+&#x60;&#x60;&#x60;
+if [[ $# &#x3D;&#x3D; 2 ]]
+then
+  echo &quot;number of arguments is equal to 2&quot;
+else
+  echo &quot;number of arguments is not equal to 2&quot;
+fi
+&#x60;&#x60;&#x60;
+
+Notice the use of the double square brackets, which is the syntax required for making integer comparisons in the condition &#x60;[[ $# &#x3D;&#x3D; 2 ]]&#x60;.
+
+You can also make string comparisons. For example, assume you have a variable called &#x60;string_var&#x60; that has the value &#x60;&quot;Yes&quot;&#x60; assigned to it. Then the following statement evaluates to &#x60;true&#x60;:
+
+&#x60;&#x60;&#x60;
+&#x60;[ $string_var &#x3D;&#x3D; &quot;Yes&quot; ]&#x60;
+&#x60;&#x60;&#x60;
+Notice you only need single square brackets when making string comparisons.
+
+You can also include multiple conditions to be satified by using the \&quot;and\&quot; operator &#x60;&amp;&amp;&#x60; or the \&quot;or\&quot; operator &#x60;||&#x60;. For example:
+
+&#x60;&#x60;&#x60;
+if [ condition1 ] &amp;&amp; [ condition2 ]
+then
+    echo &quot;conditions 1 and 2 are both true&quot;
+else
+    echo &quot;one or both conditions are false&quot;
+fi
+&#x60;&#x60;&#x60;
+&#x60;&#x60;&#x60;
+if [ condition1 ] || [ condition2 ]
+then
+    echo &quot;conditions 1 or 2 are true&quot;
+else
+    echo &quot;both conditions are false&quot;
+fi
+&#x60;&#x60;&#x60;
+
+## Logical operators
+
+The following logical operators can be used to compare integers within a condition in an &#x60;if&#x60; condition block.
+
+&#x60;&#x3D;&#x3D;&#x60;: is equal to
+
+If a variable &#x60;a&#x60; has a value of 2, the following condition evaluates to &#x60;true&#x60;; otherwise it evalutes to &#x60;false&#x60;.
+&#x60;&#x60;&#x60;
+$a &#x3D;&#x3D; 2
+&#x60;&#x60;&#x60;
+
+&#x60;!&#x3D;&#x60;: is not equal to
+
+If a variable &#x60;a&#x60; has a value different from 2, the following statement evaluates to &#x60;true&#x60;. If its value is 2, then it evalutes to &#x60;false&#x60;.
+
+&#x60;&#x60;&#x60;
+a !&#x3D; 2
+&#x60;&#x60;&#x60;
+&gt; **Tip**: The &#x60;!&#x60; logical negation operator changes &#x60;true&#x60; to &#x60;false&#x60; and &#x60;false&#x60; to &#x60;true&#x60;. 
+
+&#x60;&lt;&#x3D;&#x60;: is less than or equal to
+
+If a variable &#x60;a&#x60; has a value of 2, then the following statement evaluates to &#x60;true&#x60;:
+
+&#x60;&#x60;&#x60;
+a &lt;&#x3D; 3
+&#x60;&#x60;&#x60;
+and the following statement evalutates to &#x60;false&#x60;:
+&#x60;&#x60;&#x60;
+a &lt;&#x3D; 1
+&#x60;&#x60;&#x60;
+
+Alternatively, you can use the equivalent notation &#x60;-le&#x60; in place of &#x60;&lt;&#x3D;&#x60;:
+&#x60;&#x60;&#x60;
+a&#x3D;1
+b&#x3D;2
+if [ $a -le $b ]
+then
+   echo &quot;a is less than or equal to b&quot;
+else
+   echo &quot;a is not less than or equal to b&quot;
+fi
+&#x60;&#x60;&#x60;
+We\&#x27;ve only provided a small sampling of logical operators here. You can explore resources such as the [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/comparison-ops.html) to find out more.
+
+## Arithmetic calculations
+You can perform integer addition, subtraction, multiplication, and division using the notation &#x60;$(())&#x60;.
+For example, the following two sets of commands both display the result of adding 3 and 2.
+
+&#x60;&#x60;&#x60;
+echo $((3+2))
+&#x60;&#x60;&#x60;
+
+or
+
+&#x60;&#x60;&#x60;
+a&#x3D;3
+b&#x3D;2
+c&#x3D;$(($a+$b))
+echo $c
+&#x60;&#x60;&#x60;
+
+Bash natively handles integer arithmetic but does not handle floating-point arithmetic. As a result, it will always truncate the decimal portion of a calculation result.
+
+For example:
+
+&#x60;&#x60;&#x60;
+echo $((3/2))
+&#x60;&#x60;&#x60;
+prints the truncated integer result, &#x60;1&#x60;, not the floating-point number, &#x60;1.5&#x60;.
+
+The following table summarizes the basic arithmetic operators:
+
+
+| Symbol | Operation      | 
+| ------ | -------------  |
+| &#x60;+&#x60;      | addition       |
+| &#x60;-&#x60;      | subtraction    |
+| &#x60;*&#x60;      | multiplication |
+| &#x60;/&#x60;      | division       |
+
+&gt; Table: **Arithmetic operators**
+
+
+## Arrays
+The **array** is a Bash built-in data structure. An array is a space-delimited list contained in parentheses.ʊTo create an array, declare its name and contents:
+&#x60;&#x60;&#x60;
+my_array&#x3D;(1 2 &quot;three&quot; &quot;four&quot; 5)
+&#x60;&#x60;&#x60;
+
+This statement creates and populates the array &#x60;my_array&#x60; with the items in the parentheses: &#x60;1&#x60;, &#x60;2&#x60;, &#x60;&quot;three&quot;&#x60;, &#x60;&quot;four&quot;&#x60;, and &#x60;5&#x60;.
+
+You can also create an empty array by using:
+&#x60;&#x60;&#x60;
+declare -a empty_array
+&#x60;&#x60;&#x60;
+
+If you want to add items to your array after creating it, you can add to your array by appending one element at a time:
+&#x60;&#x60;&#x60;
+my_array+&#x3D;(&quot;six&quot;)
+my_array+&#x3D;(7)
+&#x60;&#x60;&#x60;
+This adds elements &#x60;&quot;six&quot;&#x60; and &#x60;7&#x60; to the array &#x60;my_array&#x60;.
+
+By using indexing, you can access individual or multiple elements of an array:
+&#x60;&#x60;&#x60;
+# print the first item of the array:
+echo ${my_array[0]}
+
+# print the third item of the array:
+echo ${my_array[2]}
+
+# print all array elements:
+echo ${my_array[@]}
+&#x60;&#x60;&#x60;
+&gt; **Tip:** Note that array indexing starts from 0, not from 1.
+
+## &#x60;for&#x60; loops
+You can use a construct called a &#x60;for&#x60; loop along with indexing to iterate over all elements of an array.
+
+For example, the following &#x60;for&#x60; loops will continue to run over and over again until every element is printed:
+
+&#x60;&#x60;&#x60;
+for item in ${my_array[@]}; do
+  echo $item
+done
+&#x60;&#x60;&#x60;
+
+or
+
+&#x60;&#x60;&#x60;
+for i in ${!my_array[@]}; do
+  echo ${my_array[$i]}
+done
+&#x60;&#x60;&#x60;
+The &#x60;for&#x60; loop requires a &#x60;; do&#x60; component in order to cycle through the loop. Additionally, you need to terminate the &#x60;for&#x60; loop block with a &#x60;done&#x60; statement.
+
+Another way to implement a &#x60;for&#x60; loop when you know how many iterations you want is as follows. For example, the following code prints the number 0 through 6.
+
+&#x60;&#x60;&#x60;
+N&#x3D;6
+for (( i&#x3D;0; i&lt;&#x3D;$N; i++ )) ; do
+  echo $i
+done
+&#x60;&#x60;&#x60;
+
+
+You can use &#x60;for&#x60; loops to accomplish all sorts of things. For example, you could count the number of items in an array or sum up its elements, as the following Bash script does:
+
+&#x60;&#x60;&#x60;
+#!/usr/bin/env bash
+# initialize array, count, and sum
+my_array&#x3D;(1 2 3)
+count&#x3D;0
+sum&#x3D;0
+for i in ${!my_array[@]}; do
+  # print the ith array element
+  echo ${my_array[$i]}
+  # increment the count by one
+  count&#x3D;$(($count+1))
+  # add the current value of the array to the sum
+  sum&#x3D;$(($sum+${my_array[$i]}))
+done
+echo $count
+echo $sum
+&#x60;&#x60;&#x60;
+
+Go ahead and try running this script, so you get a sense of how this loop works. 
+
+## Summary
+In this lab, you learned that:
+- Conditional statements can be used to run commands based on whether a specified condition is &#x60;true&#x60;
+- Logical operators do &#x60;true&#x60;/&#x60;false&#x60; comparisons
+- Arithmetic operators perform basic arithmetic calculations
+- You can create list-like arrays and access their individual elements
+- &#x60;for&#x60; loops execute operations repeatedly, based on a looping index 
+
+
+Congratulations! You are now ready to practice your newly acquired knowledge in the following hands-on lab.
+
+
+
+## Authors
+
+Jeff Grossman
+Sam Prokopchuk
+
+### Other Contributors
+
+Rav Ahuja
+&lt;footer&gt; &lt;img align&#x3D;&quot;left&quot; src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/MXeMas_DKhtICLxUfsJi9w.png&quot;&gt; &lt;/footer&gt;
+&lt;!--
+
+## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                |
+| ----------------- | ------- | ----------------- | --------------------------------- |
+| 2023-12-11        | 1.9     | K Sundararajan    | Update in a code under &#x60;Conditionals&#x60; section for accuracy |
+| 2023-08-01        | 1.8     | K Sundararajan    | Updated the &#x60;shebang&#x60; line in the last code |
+| 2023-05-17        | 1.7     | Jeff Grossman     | Add &#x60;&amp;&amp;&#x60;, &#x60;\|\|&#x60; conditional logic |
+| 2023-05-17        | 1.6     | Jeff Grossman     | Add for loop w/ known #iterations |
+| 2023-05-12        | 1.5     | Nick Yi           | Review and edits |
+| 2023-05-10        | 1.4     | Jeff Grossman     | Add table of arithmetic operators |
+| 2023-05-10        | 1.3     | Jeff Grossman     | Add string comparison     |
+| 2023-03-23        | 1.2     | Nick Yi           | ID review                 |
+| 2023-03-17        | 1.1     | Jeff Grossman     | edit and expand content   |
+| 2022-04-05        | 1.0     | Sam Prokopchuk    | create inital reading     |
+
+@ IBM Corporation 2022-23. All rights reserved.  
+--&gt;
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;title&quot;:&quot;labs/Final Project/Final_Project&quot;,&quot;branch&quot;:&quot;lab-6628-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-26T21:22:52Z&quot;,&quot;tool-type&quot;:&quot;instructional-lab&quot;,&quot;audio-timestamp-of-request-to-generate-wav&quot;:&quot;2024-04-08T12:36:58Z&quot;,&quot;audio-file-url&quot;:&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/Introduction_to_Advanced_Bash_Scripting.md.wav&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "instructional-lab";
+        let filename = `labs/Final%20Project/Introduction_to_Advanced_Bash_Scripting.md`;
+        let audio = JSON.parse(`{"url":"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/Introduction_to_Advanced_Bash_Scripting.md.wav","isValid":true,"isOutdated":true}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>
