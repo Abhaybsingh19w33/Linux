@@ -12,3 +12,7 @@ In this module, you will learn how to use common Linux commands. You will learn 
 ## Module 3
 ### Introduction to Shell Scripting
 In this module, you will learn the basics of shell scripting. You will learn what a script is and when to use scripts. You will be able to describe the shebang interpreter directive and create and run a simple shell script. Additionally, this module will teach you how to use pipes and filters and set shell and environment variables. By the end of this module, you will also be able to list features of Bash shell scripting and use crontab to schedule cron jobs, understand the cron syntax, and view and remove cron jobs.
+
+## Module 4
+### Final Project and Final Exam
+In this module, you will complete a practice project in which you create an automated Extract, Transform, Load (ETL) process to extract daily weather forecasts and observed weather data. You will schedule this process to run automatically at a set time daily and learn how to create a script to measure forecast accuracy. In your peer-graded final project, you will create a scheduled backup script. Finally, you will demonstrate the knowledge you've gained by taking a final graded exam.

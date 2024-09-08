@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Linux Commands and Shell Scripting - Final Project&quot;}
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;200&quot; /&gt; &lt;br&gt;
+
+Estimated time needed: **90** minutes
+
+Welcome to the hands-on lab for the final project!
+
+In this scenario, you are a lead Linux developer at the top-tech company ABC International Inc. As one of ABC Inc.\&#x27;s most trusted Linux developers, you have been tasked with creating a script called &#x60;backup.sh&#x60; which runs every day and automatically backs up any encrypted password files that have been updated in the past 24 hours.
+
+Please complete the following tasks, and be sure to follow the directions as you go. Don\&#x27;t forget to save your work.
+
+
+::page{title&#x3D;&quot;Getting started&quot;}
+
+## Task 0
+
+1. Open a new terminal by clicking on the menu bar and selecting **Terminal**-&gt;**New Terminal**:  
+
+2. Download the template file &#x60;backup.sh&#x60; by running the command below:
+
+&#x60;&#x60;&#x60;
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/backup.sh
+&#x60;&#x60;&#x60;
+
+3. Open the file in the IDE by clicking **File**-&gt;**Open** as seen below:
+  
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/file-open.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt;
+
+then click on the file, which should have been downloaded to your &#x60;project&#x60; directory:  
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/prompt-open.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt;  
+
+## About the template script &#x60;backup.sh&#x60;
+
+  1. You will notice the template script contains comments (lines starting with the &#x60;#&#x60; symbol). Do __not__ delete these.
+  
+The ones that look like &#x60;# [TASK {number}]&#x60; will be used by your grader:
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/task-comments.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt;
+  
+
+  2. Also, please do __not__ modify any existing code above &#x60;# [TASK 1]&#x60; in the script.
+  
+
+## Saving your progress
+
+Your work __will not__ be saved if you exit your session.  
+
+In order to save your progress:  
+
+  1. Save the current working file (&#x60;backup.sh&#x60;) with &#x60;CTRL&#x60;+&#x60;s&#x60; [Windows/Linux], &#x60;CMD&#x60;+&#x60;s&#x60; [MAC], or navigate to **File**-&gt;**Save** as seen below:  
+     
+     &lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/file-save.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt;  
+
+  2. Download the file to your local computer by navigating to **File**-&gt;**Download** as seen below:  
+    
+     &lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/file-download.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt; 
+
+  3. Unfortunately, our editor does **not** currently support file uploading, so you will need to copy and paste your work as follows:  
+     - To \&quot;upload\&quot; your in-progress &#x60;backup.sh&#x60; file and continue working on it:  
+        1. Open a terminal and type &#x60;touch backup.sh&#x60;  
+        2. Open the empty &#x60;backup.sh&#x60; file in the editor  
+        3. Copy-paste the contents of your locally-saved &#x60;backup.sh&#x60; file into the empty &#x60;backup.sh&#x60; file in the editor
+  
+
+::page{title&#x3D;&quot;&quot;}
+
+## Task 1
+
+Navigate to &#x60;# [TASK 1]&#x60; in the code.
+
+Set two variables equal to the values of the first and second command line arguments, as follows:
+
+1. Set &#x60;targetDirectory&#x60; to the first command line argument
+2. Set &#x60;destinationDirectory&#x60; to the second command line argument
+
+This task is meant to help with code readability.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; The command line arguments interpreted by the script can be accessed via &#x60;$1&#x60; (first argument) and &#x60;$2&#x60; (second argument).
+
+&lt;/details&gt;
+
+Take a screenshot of the output of the command above and save it as &#x60;01-Set_Variables.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 2
+
+1. Display the values of the two command line arguments in the terminal.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Remember, you can use the command &#x60;echo&#x60; as a print command.
+&gt; - Example: &#x60;echo &quot;The year is $year&quot;&#x60;
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;02-Display_Values.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 3
+
+1. Define a variable called &#x60;currentTS&#x60; as the current timestamp, expressed in seconds.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Remember you can customize the output format of the &#x60;date&#x60; command.
+&gt;	
+&gt; To set a variable equal to the output of a command you can use command substitution: &#x60;$()&#x60; or &#x60;&#x60; &#x60; &#x60; &#x60;&#x60;
+&gt;   - For example: &#x60;currentYear&#x3D;$(date +%Y)&#x60;
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;03-CurrentTS.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 4
+
+1. Define a variable called &#x60;backupFileName&#x60; to store the name of the archived and compressed backup file that the script will create.
+
+  &gt; The variable &#x60;backupFileName&#x60; should have the value &#x60;&quot;backup-[$currentTS].tar.gz&quot;&#x60;
+  &gt; - For example, if &#x60;currentTS&#x60; has the value &#x60;1634571345&#x60;, then &#x60;backupFileName&#x60; should have the value &#x60;backup-1634571345.tar.gz&#x60;.
+
+2. Take a screenshot of the output of the command above and save it as &#x60;04-Set_Value.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 5
+
+1. Define a variable called &#x60;origAbsPath&#x60; with the absolute path of the current directory as the variable\&#x27;s value.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; You can get the absolute path of the current directory using the &#x60;pwd&#x60; command.
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;05-Define_Variable.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 6
+
+1. Define a variable called &#x60;destAbsPath&#x60; whose value equals the absolute path of the destination directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; First use &#x60;cd&#x60; to go to &#x60;destinationDirectory&#x60;, then use the same method you used in **Task 5**.
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;06-Define_Variable.jpg&#x60; or &#x60;.png&#x60;.
+
+::page{title&#x3D;&quot;Checkpoint&quot;}
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/save.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot; align&#x3D;&quot;center&quot;&gt;
+
+
+Friendly reminder to save your work to your local computer!
+
+::page{title&#x3D;&quot;&quot;}
+
+## Task 7
+
+1. Change directories from the current working directory to the target directory &#x60;targetDirectory&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; &#x60;cd&#x60; into the original directory &#x60;origAbsPath&#x60; and then &#x60;cd&#x60; into &#x60;targetDirectory&#x60;.
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;07-Change_Directory.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 8
+
+You need to find files that have been updated within the past 24 hours. This means you need to find all files whose last-modified date was 24 hours ago or less.
+
+To do make this easier:
+
+1. Define a numerical variable called &#x60;yesterdayTS&#x60; as the timestamp (in seconds) 24 hours prior to the current timestamp, &#x60;currentTS&#x60;.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Math can be done using &#x60;$(())&#x60;, for example:
+&gt; - &#x60;zero&#x3D;$((3 * 5 - 6 - 9))&#x60;
+&gt;
+&gt;Thus, to get the timestamp in seconds of 24 hours _in the future_, you would use:
+&gt; - &#x60;tomorrowTS&#x3D;$(($currentTS + 24 * 60 * 60))&#x60;
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;08-YesterdayTS.jpg&#x60; or &#x60;.png&#x60;.
+
+::page{title&#x3D;&quot;Note on arrays&quot;}
+
+In the script, you will notice the line:
+
+&#x60;&#x60;&#x60;
+declare -a toBackup
+&#x60;&#x60;&#x60;
+
+This line declares a variable called &#x60;toBackup&#x60;, which is an **array**. An array contains a list of values, and you can append items to arrays using the following syntax:
+
+&#x60;&#x60;&#x60;
+myArray+&#x3D;($myVariable)
+&#x60;&#x60;&#x60;
+
+When you print or &#x60;echo&#x60; an array, you will see its string representation, which is simply all of its values separated by spaces:
+
+&#x60;&#x60;&#x60;
+$ declare -a myArray
+$ myArray+&#x3D;(&quot;Linux&quot;)
+$ myArray+&#x3D;(&quot;is&quot;)
+$ myArray+&#x3D;(&quot;cool!&quot;)
+$ echo ${myArray[@]}
+Linux is cool!
+&#x60;&#x60;&#x60;
+
+This will be useful later in the script where you will pass the array &#x60;$toBackup&#x60;, consisting of the names of all files that need to be backed up, to the &#x60;tar&#x60; command. This will archive all files at once!
+
+::page{title&#x3D;&quot;&quot;}
+
+## Task 9
+
+1. Within the &#x60;$()&#x60; expression inside the &#x60;for&#x60; loop, write a command that will return all files and directories in the current folder.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; There is a very clean way of doing this using &#x60;ls&#x60;.
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;09-List_AllFilesandDirectoriess.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 10
+
+1. Inside the &#x60;for&#x60; loop, you want to check whether the &#x60;$file&#x60; was modified within the last 24 hours.
+
+&gt;To get the last-modified date of a file in seconds, use &#x60;date -r $file +%s&#x60; then compare the value to &#x60;yesterdayTS&#x60;.
+&gt;
+&gt;&#x60;if [[ $file_last_modified_date &gt; $yesterdayTS ]]&#x60; then the file was updated within the last 24 hours!
+
+2. Since much of this wasn&#x27;t covered in the course, for this task you may copy the code below and paste it into the double round brackets &#x60;(())&#x60;:
+
+&#x60;&#x60;&#x60;
+&#x60;date -r $file +%s&#x60; &gt; $yesterdayTS
+&#x60;&#x60;&#x60;
+
+3. Take a screenshot of the output of the command above and save it as &#x60;10-IF_Statement.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 11
+
+1. In the &#x60;if-then&#x60; statement, add the &#x60;$file&#x60; that was updated in the past 24-hours to the &#x60;toBackup&#x60; array.
+2. Since much of this wasn&#x27;t covered in the course, you may copy the code below and place after the &#x60;then&#x60; statement for this task:
+
+&#x60;&#x60;&#x60;
+toBackup+&#x3D;($file)
+&#x60;&#x60;&#x60;
+3. Take a screenshot of the output of the command above and save it as &#x60;11-Add_File.jpg&#x60; or &#x60;.png&#x60;.
+
+::page{title&#x3D;&quot;Checkpoint&quot;}
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/save.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot; align&#x3D;&quot;center&quot;&gt;
+
+Friendly reminder to save your work to your local computer!  
+
+::page{title&#x3D;&quot;&quot;}
+
+## Task 12
+
+1. After the &#x60;for&#x60; loop, **compress** and **archive** the files, using the &#x60;$toBackup&#x60; array of filenames, to a file with the name &#x60;backupFileName&#x60;.
+  
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use &#x60;tar -czvf $backupFileName ${toBackup[@]}&#x60;.
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;12-Create_Backup.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 13
+
+Now the file &#x60;$backupFileName&#x60; is created in the current working directory.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Move the file &#x60;backupFileName&#x60; to the destination directory located at &#x60;destAbsPath&#x60;.
+
+&lt;/details&gt;
+
+2. Take a screenshot of the output of the command above and save it as &#x60;13-Move_Backup.jpg&#x60; or &#x60;.png&#x60;.
+
+------------
+
+Congratulations! You have now done the coding portion of the lab!
+
+::page{title&#x3D;&quot;&quot;}
+
+## Task 14
+
+  1. Save the current working file &#x60;backup.sh&#x60; with &#x60;CTRL&#x60;+&#x60;s&#x60; [Windows/Linux], &#x60;CMD&#x60;+&#x60;s&#x60; [MAC] or by navigating to **File**-&gt;**Save** as seen below:
+
+      &lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/file-save.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt;
+
+  2. Download the file to your local computer by navigating to **File**-&gt;**Download** as seen below:
+
+      &lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/file-download.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt; &lt;br&gt;
+
+&gt; You may save the file as &#x60;backup.sh&#x60;
+
+3. You will later submit this file will for peer-grading.
+
+## Task 15
+
+1. Open a new terminal by clicking on the menu bar and selecting **Terminal**-&gt;**New Terminal**, as in the image below:
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/new-terminal.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt;
+
+This will open a new terminal at the bottom of the screen as seen below:
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/images/terminal_bottom_screen.png&quot; width&#x3D;&quot;50%&quot; height&#x3D;&quot;auto&quot;&gt; &lt;br&gt;
+
+2. Save the &#x60;backup.sh&#x60; file you\&#x27;re working on and make it executable.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;chmod&#x60; command with the correct options.
+
+&lt;/details&gt;
+
+3. Verify the file is executable using the &#x60;ls&#x60; command with the &#x60;-l&#x60; option:
+
+&#x60;&#x60;&#x60;sh
+ls -l backup.sh
+&#x60;&#x60;&#x60;
+
+4. Take a screenshot of the output of the command above and save it as &#x60;15-executable.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 16
+
+1. Download the following &#x60;.zip&#x60; file with the &#x60;wget&#x60; command:
+
+&#x60;&#x60;&#x60;sh
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/Final%20Project/important-documents.zip
+&#x60;&#x60;&#x60;
+
+2. Unzip the archive file:
+
+&#x60;&#x60;&#x60;sh
+unzip -DDo important-documents.zip
+&#x60;&#x60;&#x60;
+
+&gt; **Note**: &#x60;-DDo&#x60; overwrites without restoring original modified date.
+
+3. Update the file&#x27;s last-modified date to **now**:
+
+&#x60;&#x60;&#x60;
+touch important-documents/*
+&#x60;&#x60;&#x60;
+
+4. Test your script using the following command:
+
+&#x60;&#x60;&#x60;sh
+./backup.sh important-documents .
+&#x60;&#x60;&#x60;
+
+&gt; This should have created a file called &#x60;backup-[CURRENT_TIMESTAMP].tar.gz&#x60; in your current directory.
+
+5. Take a screenshot of the output of &#x60;ls -l&#x60; and save it as &#x60;16-backup-complete.jpg&#x60; or &#x60;.png&#x60;.
+
+## Task 17
+
+1. **Copy**  the &#x60;backup.sh&#x60; script into the &#x60;/usr/local/bin/&#x60; directory. (Do ***not*** use &#x60;mv&#x60;.)
+
+&gt; **Note**: You may need to use &#x60;sudo cp&#x60; in order to create a file in &#x60;/usr/local/bin/&#x60;.
+
+2. Test the cronjob to see if the backup script is getting triggered by scheduling it for every 1 minute.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;sh
+*/1 * * * * /usr/local/bin/backup.sh /home/project/important-documents /home/project
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+3. Please note that since the Theia Lab is a virtual environment, we need to explicitly start the cron service using the below command:
+
+&#x60;&#x60;&#x60;sh
+sudo service cron start
+&#x60;&#x60;&#x60;
+
+4. Once the cron service is started, check in the directory &#x60;/home/project&#x60; to see if the &#x60;.tar&#x60; files are being created. 
+
+5. If they are, then stop the cron service using the below command, otherwise it will continue to create &#x60;.tar&#x60; files every minute:
+ 
+
+&#x60;&#x60;&#x60;sh
+sudo service cron stop
+&#x60;&#x60;&#x60;
+
+6. Using crontab, schedule your &#x60;/usr/local/bin/backup.sh&#x60; script to backup the &#x60;important-documents&#x60; folder every 24 hours to the directory &#x60;/home/project&#x60;.
+
+7. Take a screenshot of the output of &#x60;crontab -l&#x60; and save as &#x60;17-crontab.jpg&#x60; or &#x60;.png&#x60;.
+
+&gt; **Tip**: When you are setting up cron jobs in a real-life scenario, ensure the cron service is running, or start the cron service if needed.
+
+
+::page{title&#x3D;&quot;Congratulations!&quot;}
+
+You have completed the final lab for this course! Well done!
+
+
+## Authors
+
+Sam Prokopchuk
+
+### Other Contributors
+
+Rav Ahuja
+
+&lt;!-- ## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description            |
+| ----------------- | ------- | ----------------- | ----------------------------- |
+| 2024-04-24        | 1.4     | K Sundararajan    | Instructions updated based on Sanity testing results  |
+| 2023-04-28        | 1.3     | Nick Yi           | QA Pass                       |
+| 2023-04-24        | 1.2     | Nick Yi           | ID Review                     |
+| 2023-03-20        | 1.1     | Jeff Grossman     | Extract LOs, Intro, Overview  |
+| 2022-04-05        | 1.0     | Sam Prokopchuk    | Create lab, exercises         | --&gt;
+
+
+&lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-6152-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-24T19:18:55Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2FFinal_Project%2FFinal_Project.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>

@@ -1,0 +1,893 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown" />
+    <meta name="description" content="Skills Network Author IDE" />
+    <title>Skills Network Editor</title>
+    <link rel="stylesheet" href="./editormd/examples/css/style.css" />
+    <link rel="stylesheet" href="./editormd/css/editormd.css" />
+    <link rel="stylesheet" href="./public/css/custom.css" />
+    <link rel="stylesheet" href="./public/css/custom_popover.css" />
+    <link rel="shortcut icon" href="./public/images/SN_favicon.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="./public/js/comms.js"></script>
+    <script src="//unpkg.com/alpinejs"></script>
+</head>
+
+<body>
+    <div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;">::page{title&#x3D;&quot;Practice Project: Historical Weather Forecast Comparison to Actuals&quot;}
+
+&lt;img src&#x3D;&quot;https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/images/IDSN-logo.png&quot; width&#x3D;&quot;200&quot;/&gt; &lt;br&gt;
+
+Estimated time needed: **30** minutes
+
+## Learning objectives
+
+In this practice project, you will:
+- Initialize your log file
+- Write a Bash script to download, extract, and load raw data into a report
+- Add some basic analytics to your report
+- Schedule your report to update daily
+- Measure and report on historical forecasting accuracy
+
+We\&#x27;ve broken this project down into manageable steps. Feel free to try any or all of these on your own; however, we recommend checking your work with the details provided.
+
+::page{title&#x3D;&quot;Exercise 1 - Initialize your weather report log file&quot;}
+
+### 1.1 Create a text file called &#x60;rx_poc.log&#x60;
+&#x60;rx_poc.log&#x60; will be your POC weather report log file, or a text file which contains a growing history of the daily weather data you will scrape. Each entry in the log file corresponds to a row as in **Table 1**.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;touch&#x60; command or open a new text file from the GUI.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+	
+&gt; Create &#x60;rx_poc.log&#x60; by entering the following in your terminal:
+	
+&#x60;&#x60;&#x60;
+touch rx_poc.log
+&#x60;&#x60;&#x60;
+
+
+&lt;/details&gt;
+
+
+### 1.2 Add a header to your weather report
+Your header should consist of the column names from **Table 1**, delimited by tabs.  
+Write the header to your weather report.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use the &#x60;echo&#x60; command with the &#x60;-e&#x60; option, and include tab separators &#x60;\t&#x60; in a string of names.  
+&gt; Consider why the &#x60;-e&#x60; option is needed.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt; Use a shell variable and command substitution:
+&#x60;&#x60;&#x60;
+header&#x3D;$(echo -e &quot;year\tmonth\tday\tobs_temp\tfc_temp&quot;)
+echo $header&gt;rx_poc.log
+&#x60;&#x60;&#x60;
+&gt; **OR** more directly, use &#x60;echo&#x60; and redirection:
+&#x60;&#x60;&#x60;
+echo -e &quot;year\tmonth\tday\thour\tobs_temp\tfc_temp&quot;&gt;rx_poc.log
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+
+&gt; **Tip**: Although it might seem redundant, it is better practice to use variables in these cases. Variables make for much cleaner code, which is easier to understand and safer to modify by others or even yourself at a later date. Using meaningful names for your variables also makes the code more \&quot;self-documenting.\&quot;
+
+
+
+::page{title&#x3D;&quot;Exercise 2 - Download the raw weather data&quot;}
+
+### 2.1. Create a text file called &#x60;rx_poc.sh&#x60; and make it an executable Bash script
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 1&lt;/summary&gt;
+
+&gt; Include a shebang.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 2&lt;/summary&gt;
+
+&gt; Use the &#x60;chmod&#x60; command.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution 1 &lt;/summary&gt;
+
+&gt; Create the file &#x60;rx_poc.sh&#x60;
+&#x60;&#x60;&#x60;
+touch rx_poc.sh
+&#x60;&#x60;&#x60;
+&gt;	Include the Bash shebang on the first line of &#x60;rx_poc.sh&#x60;:
+&#x60;&#x60;&#x60;
+#! /bin/bash
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution 2 &lt;/summary&gt;
+
+&gt; Make your script executable by running the following in the terminal:
+&#x60;&#x60;&#x60;
+chmod u+x rx_poc.sh
+&#x60;&#x60;&#x60;
+
+&gt; Verify your changes using the &#x60;ls&#x60; command with the &#x60;-l&#x60; option.
+&lt;/details&gt;
+
+
+### 2.2. Assign the city name to &#x60;Casablanca&#x60; for accessing the weather report
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint &lt;/summary&gt;
+
+&gt; Use the assignment operator
+
+&lt;/details&gt;
+
+
+&lt;details&gt;
+
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+city&#x3D;Casablanca
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+
+#### 2.3  Obtain the weather information for Casablanca
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+	
+&gt; Use the &#x60;curl&#x60; command with the &#x60;--output&#x60; option.  Saved the output to a  file named &#x60;weather_report&#x60;.
+	
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt; Edit &#x60;rx_poc.sh&#x60; to include:
+&#x60;&#x60;&#x60;
+curl -s wttr.in/$city?T --output weather_report
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+
+
+::page{title&#x3D;&quot;Exercise 3 - Extract and load the required data&quot;}
+
+### 3.1. Edit &#x60;rx_poc.sh&#x60; to extract the required data from the raw data file and assign them to variables &#x60;obs_temp&#x60; and &#x60;fc_temp&#x60;
+
+Extracting the required data is a process that will take some trial and error until you get it right. Study the weather report you obtained in Step 2.3, determine what you need to extract, and look for patterns.
+
+You are looking for ways to \&#x27;chip away\&#x27; at the weather report by:
+- Using shell commands to extract only the data you need (the **signal**)
+- Filtering everything else out (the **noise**)
+- Combining your filters into a pipeline (recall the use of **pipes** to chain **filters** together)
+
+&lt;details&gt;
+&lt;summary&gt;Click here for a Hint to get started&lt;/summary&gt;
+
+&gt; Extract only those lines that contain temperatures from the weather report, and save the result to variables representing the temparature output.
+
+&lt;/details&gt;
+
+ 
+#### 3.1.1. Extract the current temperature, and store it in a shell variable called &#x60;obs_temp&#x60;
+Remember to validate your results.
+
+You may have noticed by now that the temperature values extracted from *wttr.in* are surrounded by special formatting characters. These \&quot;hidden\&quot; characters cause the numbers to display in specific color - for example, when you use the &#x60;cat&#x60; command to display your log file.
+
+
+Unfortunately you cannot perform arithmetic calculations on such formatted text, so you will need to extract the values from the surrounding formatting so you can make use of them later in this lab. 
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 1&lt;/summary&gt;
+
+&gt; Which line is the current temperature on?
+
+&lt;/details&gt;
+
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 2&lt;/summary&gt;
+
+&gt; Are there any characters you can use as a delimiter to appropriately parse the line into fields?
+
+&lt;/details&gt;
+
+
+&lt;details&gt;
+
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt; While adding the following lines to &#x60;rx_poc.sh&#x60;, ensure you understand what each filter accomplishes by using the command line. Try adding one filter at a time to see what the outcome is as you develop the pipeline.
+
+&#x60;&#x60;&#x60;
+#To extract Current Temperature
+obs_temp&#x3D;$(curl -s wttr.in/$city?T | grep -m 1 &#x27;°.&#x27; | grep -Eo -e &#x27;-?[[:digit:]].*&#x27;)
+echo &quot;The current Temperature of $city: $obs_temp&quot;
+&#x60;&#x60;&#x60;
+
+- The first line uses the curl command to fetch weather information from wttr.in for the specified city ($city). It then uses a combination of grep and grep -Eo to extract the current temperature in degrees Celsius and assigns it to the variable obs_temp.
+
+- The second line (&#x60;echo $obs_temp&#x60;) prints the current temperature to the console.
+
+
+&lt;/details&gt;
+
+#### 3.1.2. Extract tomorrow\&#x27;s temperature forecast for noon, and store it in a shell variable called &#x60;fc_temp&#x60;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Provided you understand the previous pipeline, you will be able to solve this problem through experimentation.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt; Add to &#x60;rx_poc.sh&#x60;:
+&#x60;&#x60;&#x60;
+# To extract the forecast tempearature for noon tomorrow
+fc_temp&#x3D;$(curl -s wttr.in/$city?T | head -23 | tail -1 | grep &#x27;°.&#x27; | cut -d &#x27;C&#x27; -f2 | grep -Eo -e &#x27;-?[[:digit:]].*&#x27;)
+echo &quot;The forecasted temperature for noon tomorrow for $city : $fc_temp C&quot;
+&#x60;&#x60;&#x60;
+
+- The first line uses a combination of head and tail to narrow down to the line containing tomorrow&#x27;s noon forecast temperature. grep and cut are employed to isolate and format the temperature information, and, the numeric part of the temperature is captured using grep -Eo.
+
+- The second line (echo $fc_temp) prints the forecast temperature for noon tomorrow to the console.
+
+&lt;/details&gt;
+
+### 3.2. Store the current hour, day, month, and year in corresponding shell variables
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Use command substitution and the &#x60;date&#x60; command with the correct formatting options.
+&gt; The time zone for Casablanca is UTC+1. To get the local time for Casablanca, you can set the time-zone environment variable, &#x60;TZ&#x60;, as follows:
+&#x60;&#x60;&#x60; 
+TZ&#x3D;&#x27;Morocco/Casablanca&#x27;
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+	
+&gt; Add to &#x60;rx_poc.sh&#x60;:
+
+&#x60;&#x60;&#x60;
+#Assign Country and City to variable TZ
+TZ&#x3D;&#x27;Morocco/Casablanca&#x27;
+
+# Use command substitution to store the current day, month, and year in corresponding shell variables:
+hour&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date -u +%H) 
+day&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date -u +%d) 
+month&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date +%m)
+year&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date +%Y)
+&#x60;&#x60;&#x60;
+&gt;**Note**: You might be wondering why we didn\&#x27;t just set &#x60;hour&#x60; to a value of 12, since we want to get the time at noon.
+&gt; However, if we did, we would lose the ability to verify that we are actually running the code at the correct *local* time. 
+&gt; You should think of the local time as a *measurement* rather than a set number.
+	
+&lt;/details&gt;
+
+
+
+### 3.3. Merge the fields into a tab-delimited record, corresponding to a single row in **Table 1**
+Append the resulting record as a row of data to your weather log file.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; How did you create the header to initialize your log file?
+
+&lt;/details&gt;
+
+&lt;details&gt;
+
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+	
+&gt; Add to &#x60;rx_poc.sh&#x60;:
+&#x60;&#x60;&#x60;
+record&#x3D;$(echo -e &quot;$year\t$month\t$day\t$obs_temp\t$fc_temp C&quot;)
+echo $record&gt;&gt;rx_poc.log
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+
+
+::page{title&#x3D;&quot;Exercise 4 - Schedule your Bash script &#x60;rx_poc.sh&#x60; to run every day at noon local time&quot;}
+
+### 4.1. Determine what time of day to run your script
+Recall that you want to load the weather data coresponding to noon, local time, in Casablanca every day.
+
+First, check the time difference between your system\&#x27;s default time zone and UTC.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 1&lt;/summary&gt;
+
+&gt; Use the &#x60;date&#x60; command twice with appropriate options; once to get your system time, and once to get UTC.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt; Running the following commands gives you the info you need to get the time difference between your system and UTC. 
+&#x60;&#x60;&#x60;
+$ date
+Mon Feb 13 11:28:12 EST 2023
+$ date -u
+Mon Feb 13 16:28:16 UTC 2023
+&#x60;&#x60;&#x60;
+&gt; Now you can determine how many hours difference there are between your system\&#x27;s local time and that of Casablanca. In the example above, we see that the system time relative to UTC is UTC+5 (i.e. 16 - 11 &#x3D; 5). 
+&gt;
+&gt; We know Casablanca is UTC+1, so the system time relative to Casablanca is 4 hours earlier. Thus to run your script at noon Casablanca time, you need to run it at 8 am.
+&lt;/details&gt;
+
+
+
+### 4.2 Create a cron job that runs your script 
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Edit the crontab file and review the crontab syntax description included in the file.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&gt;Edit the crontab file:
+&gt;&#x60;&#x60;&#x60;
+&gt;crontab -e
+&gt;&#x60;&#x60;&#x60;
+&gt;Add the following line at the end of the file:
+&gt;&#x60;&#x60;&#x60;
+&gt;0 8 * * * /home/project/rx_poc.sh
+&gt;&#x60;&#x60;&#x60;
+&gt;Save the file and quit the editor.
+
+&lt;/details&gt;
+
+
+
+### 4.3 Full solution
+For reference, here is a Bash script that creates the raw weather report. Try to follow all the steps on your own before looking!
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Full Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+#! /bin/bash
+ 
+#Assign city name as Casablanca
+city&#x3D;Casablanca
+
+#Obtain the weather report for Casablanca
+curl -s wttr.in/$city?T --output weather_report
+
+#To extract Current Temperature
+obs_temp&#x3D;$(curl -s wttr.in/$city?T | grep -m 1 &#x27;°.&#x27; | grep -Eo -e &#x27;-?[[:digit:]].*&#x27;)
+echo &quot;The current Temperature of $city: $obs_temp&quot;
+
+# To extract the forecast tempearature for noon tomorrow
+fc_temp&#x3D;$(curl -s wttr.in/$city?T | head -23 | tail -1 | grep &#x27;°.&#x27; | cut -d &#x27;C&#x27; -f2 | grep -Eo -e &#x27;-?[[:digit:]].*&#x27;)
+echo &quot;The forecasted temperature for noon tomorrow for $city : $fc_temp C&quot;
+
+#Assign Country and City to variable TZ
+TZ&#x3D;&#x27;Morocco/Casablanca&#x27;
+
+
+# Use command substitution to store the current day, month, and year in corresponding shell variables:
+hour&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date -u +%H)
+day&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date -u +%d)
+month&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date +%m)
+year&#x3D;$(TZ&#x3D;&#x27;Morocco/Casablanca&#x27; date +%Y)
+
+
+# Log the weather
+record&#x3D;$(echo -e &quot;$year\t$month\t$day\t$obs_temp\t$fc_temp C&quot;)
+echo $record&gt;&gt;rx_poc.log
+
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+
+::page{title&#x3D;&quot;Exercise 5 - Create a script to report historical forecasting accuracy&quot;}
+
+Now that you\&#x27;ve created an ETL shell script to gather weather data into a report, let\&#x27;s create another  script to measure and report the accuracy of the forecasted temperatures against the actuals.
+
+- To start, create a tab-delimited file named &#x60;historical_fc_accuracy.tsv&#x60;. 
+
+Insert the following code into the file to include a header with column names:
+
+&#x60;&#x60;&#x60;
+echo -e &quot;year\tmonth\tday\tobs_temp\tfc_temp\taccuracy\taccuracy_range&quot; &gt; historical_fc_accuracy.tsv
+&#x60;&#x60;&#x60;
+
+One key difference between this report and the previous report you generated is that the forecast temperature will now be aligned with the date the forecast is for. As a result, the date will be in the same row as the observed temperature for that date, rather than the previous row on the day that the forecast was made.
+
+&lt;br&gt;
+
+- Also create an executable Bash script called &#x60;fc_accuracy.sh&#x60;.
+
+Rather than scheduling your new script to run periodically, think of it as a tool you can use to generate the historical forecast accuracy on demand.
+
+### 5.1. Determine the difference between today\&#x27;s forecasted and actual temperatures
+Rather than writing the script to process all of the data at once, let\&#x27;s simplify by solving the problem for just one instance. Later you can modify the script to handle the general case of mupltiple days.
+
+#### 5.1.1. Extract the forecasted and observed temperatures for today and store them in variables
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 1&lt;/summary&gt;
+
+&gt; Look up the record from yesterday.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+
+&lt;summary&gt;Click here for Hint 2&lt;/summary&gt;
+
+&gt; Extract the forecast from the appropriate field.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+yesterday_fc&#x3D;$(tail -2 rx_poc.log | head -1 | cut -d &quot; &quot; -f5)
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+#### 5.1.2. Calculate the forecast accuracy
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint &lt;/summary&gt;
+
+&gt; First extract today\&#x27;s observed temperature. Then calculate the difference between the forecasted and observed temperatures.
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+today_temp&#x3D;$(tail -1 rx_poc.log | cut -d &quot; &quot; -f4)
+accuracy&#x3D;$(($yesterday_fc-$today_temp))
+echo &quot;accuracy is $accuracy&quot;
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+&gt; **Tip**: Your weather report must have at least two days of data for this calulation to make sense.
+&gt; To test your code you can simply append some artificial data to your weather report, &#x60;rx_poc.log&#x60;.
+
+### 5.2. Assign a label to each forecast based on its accuracy
+Let\&#x27;s set the accuracy labels according to the range that the accuracy fits most tightly within, according to the following table. Validate your result.
+
+| accuracy range | accuracy label |
+| ------------   | -------------- |
+|  +/- 1 deg     | excellent      |
+|  +/- 2 deg     | good           |
+|  +/- 3 deg     | fair           |
+|  +/- 4 deg     | poor           |
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint 1&lt;/summary&gt;
+
+&gt; Use two conditions to compare the accuracy sizes to each positive and negative integer range, accordingly.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+if [ -1 -le $accuracy ] &amp;&amp; [ $accuracy -le 1 ]
+then
+   accuracy_range&#x3D;excellent
+elif [ -2 -le $accuracy ] &amp;&amp; [ $accuracy -le 2 ]
+then
+    accuracy_range&#x3D;good
+elif [ -3 -le $accuracy ] &amp;&amp; [ $accuracy -le 3 ]
+then
+    accuracy_range&#x3D;fair
+else
+    accuracy_range&#x3D;poor
+fi
+
+echo &quot;Forecast accuracy is $accuracy&quot;
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+### 5.3. Append a record to your historical forecast accuracy file.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint&lt;/summary&gt;
+
+&gt; Extract the right row and remaining data you need to populate all fields.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+row&#x3D;$(tail -1 rx_poc.log)
+year&#x3D;$( echo $row | cut -d &quot; &quot; -f1)
+month&#x3D;$( echo $row | cut -d &quot; &quot; -f2)
+day&#x3D;$( echo $row | cut -d &quot; &quot; -f3)
+echo -e &quot;$year\t$month\t$day\t$today_temp\t$yesterday_fc\t$accuracy\t$accuracy_range&quot; &gt;&gt; historical_fc_accuracy.tsv
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+### 5.4. Full solution for handling a single day
+Below is the final script of &#x60;fc_accuracy.sh&#x60; for handling the accuracy calculations based on just one instance, or day. 
+
+&lt;details&gt;
+	&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+&#x60;&#x60;&#x60;
+#! /bin/bash
+
+yesterday_fc&#x3D;$(tail -2 rx_poc.log | head -1 | cut -d &quot; &quot; -f5)
+today_temp&#x3D;$(tail -1 rx_poc.log | cut -d &quot; &quot; -f4)
+accuracy&#x3D;$(($yesterday_fc-$today_temp))
+
+echo &quot;accuracy is $accuracy&quot;
+
+if [ -1 -le $accuracy ] &amp;&amp; [ $accuracy -le 1 ]
+then
+           accuracy_range&#x3D;excellent
+elif [ -2 -le $accuracy ] &amp;&amp; [ $accuracy -le 2 ]
+   then
+               accuracy_range&#x3D;good
+       elif [ -3 -le $accuracy ] &amp;&amp; [ $accuracy -le 3 ]
+       then
+                   accuracy_range&#x3D;fair
+           else
+                       accuracy_range&#x3D;poor
+fi
+
+echo &quot;Forecast accuracy is $accuracy_range&quot;
+
+row&#x3D;$(tail -1 rx_poc.log)
+year&#x3D;$( echo $row | cut -d &quot; &quot; -f1)
+month&#x3D;$( echo $row | cut -d &quot; &quot; -f2)
+day&#x3D;$( echo $row | cut -d &quot; &quot; -f3)
+echo -e &quot;$year\t$month\t$day\t$today_temp\t$yesterday_fc\t$accuracy\t$accuracy_range&quot; &gt;&gt; historical_fc_accuracy.tsv
+&#x60;&#x60;&#x60;
+&lt;/details&gt;
+
+### 5.5. Generalization to all days
+We leave it as an exercise for you to generalize your code to create the entire weather accuracy history. In the next exercise, you will download and work with a synthetic version of this weather accuracy history report.
+
+Here are some suggestions to guide you should you wish to create the weather accuracy history yourself:
+
+- Iterate through your weather log file using a for loop. On each iteration:
+  - Use &#x60;head&#x60; and &#x60;tail&#x60; to extract consecutive pairs of lines on each iteration
+    - This provides you with the current and previous day\&#x27;s data
+  -  Treat this pair of lines like you did in your code as yesterday and today\&#x27;s data
+  -  Perform your accuracy calulations as before
+  -  Use the correct row to extract date information
+  -  Append your resulting data to your historical forecast accuracy report
+
+
+::page{title&#x3D;&quot;Exercise 6 - Create a script to report weekly statistics of historical forecasting accuracy&quot;}
+
+In this exercise, you will download a synthetic historical forecasting accuracy report and calculate some basic statistics based on the latest week of data. 
+
+Begin by creating an executable bash script called &#x60;weekly_stats.sh&#x60;. &lt;br&gt;
+
+### 6.1. Download the synthetic historical forecasting accuracy dataset
+Run the following command in the terminal to download the dataset to your current working directory.
+&#x60;&#x60;&#x60;
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-LX0117EN-Coursera/labs/synthetic_historical_fc_accuracy.tsv
+&#x60;&#x60;&#x60;
+
+### 6.2. Load the historical accuracies into an array covering the last week of data
+Remember to make your script executable. Also validate your result by printing the array to the terminal.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint1&lt;/summary&gt;
+
+&gt; First extract the last week of data.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint2&lt;/summary&gt;
+
+&gt; Store the values in a temporary file called &#x60;scratch.txt&#x60;. Write the contents of &#x60;scratch.txt&#x60; into an array called &#x60;week_fc&#x60;.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+Your shell script should look something like the following. There are many ways to accomplish this task, so the solution provided is not unique.
+
+&#x60;&#x60;&#x60;
+#!/bin/bash
+
+echo $(tail -7 synthetic_historical_fc_accuracy.tsv  | cut -f6) &gt; scratch.txt
+
+week_fc&#x3D;($(echo $(cat scratch.txt)))
+
+# validate result:
+for i in {0..6}; do
+    echo ${week_fc[$i]}
+done
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+### 6.3. Display the minimum and maximum absolute forecasting errors for the week
+
+Now use your array to calculate the minimum and maximum absolute errors over the last week. For example, if you have a vaule of -1, change it to be 1. Echo the minimum and maximum absolute errors to the terminal.
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint1&lt;/summary&gt;
+
+&gt; Check for any negative values in your array, and reassign these array entries with their positve counterparts.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Hint2&lt;/summary&gt;
+
+&gt; Initialize two variables, &#x60;minimum&#x60; and &#x60;maximum&#x60;. Loop over the array values and modify these two variables as required.
+
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;Click here for Solution&lt;/summary&gt;
+
+Your final shell script for &#x60;weekly_stats.sh&#x60; should now look something like the following.
+
+&#x60;&#x60;&#x60;
+#!/bin/bash
+
+echo $(tail -7 synthetic_historical_fc_accuracy.tsv  | cut -f6) &gt; scratch.txt
+
+week_fc&#x3D;($(echo $(cat scratch.txt)))
+
+# validate result:
+for i in {0..6}; do
+    echo ${week_fc[$i]}
+done
+
+for i in {0..6}; do
+  if [[ ${week_fc[$i]} &lt; 0 ]]
+  then
+    week_fc[$i]&#x3D;$(((-1)*week_fc[$i]))
+  fi
+  # validate result:
+  echo ${week_fc[$i]}
+done
+
+minimum&#x3D;${week_fc[1]}
+maximum&#x3D;${week_fc[1]}
+for item in ${week_fc[@]}; do
+   if [[ $minimum &gt; $item ]]
+   then
+     minimum&#x3D;$item
+   fi
+   if [[ $maximum &lt; $item ]]
+   then
+     maximum&#x3D;$item
+   fi
+done
+
+echo &quot;minimum ebsolute error &#x3D; $minimum&quot;
+echo &quot;maximum absolute error &#x3D; $maximum&quot;
+
+&#x60;&#x60;&#x60;
+
+&lt;/details&gt;
+
+
+::page{title&#x3D;&quot;Summary&quot;}
+
+Congratulations! You\&#x27;ve just completed a challenging, real-world practice project using many of the concepts you\&#x27;ve learned from this course. The knowledge you\&#x27;ve gained has prepared you to solve many practical real world problems. You\&#x27;re almost finished with this course now, and the final step in your journey is to complete the peer-reviewed Final Project.
+
+In this lab, you learned how to:
+- Initialize your weather report log file
+- Write a Bash script that downloads the raw weather data, and extracts and loads the required data
+- Schedule your Bash script &#x60;rx_poc.sh&#x60; to run every day at noon local time
+- Apply advanced Bash scripting to produce reporting metrics
+- Create a script to report historical forecasting accuracy
+- Create a script to report the minimum and maximum absolute errors for the week
+
+
+## Authors
+Jeff Grossman
+
+### Other Contributors
+Rav Ahuja
+
+&lt;!-- ## Change Log
+
+| Date (YYYY-MM-DD) | Version | Changed By        | Change Description                    |
+| ----------------- | ------- | ----------------- | ------------------------------------- |
+| 2024-04-24        | 2.8     | K Sundararajan    | Minor update in Exercise 3, Step 3.2 based on Sanity testing results |
+| 2023-11-30        | 2.7     | K Sundararajan    | Updated instructions based on changes in the output data from wttr.in for obtaining the correct output  |
+| 2023-11-04        | 2.6     | K Sundararajan    | &#x60;rx_poc.sh&#x60; codes further updated to get correct output from &#x60;wttr.in&#x60;   |
+| 2023-10-31        | 2.5     | K Sundararajan    | &#x60;rx_poc.sh&#x60; codes updated due to changed weather output pattern from &#x60;wttr.in&#x60;   |
+| 2023-08-28        | 2.4     | K Sundararajan    | Code updated in instructions  |
+| 2023-08-21        | 2.3     | K Sundararajan    | &#x60;rx_poc.sh&#x60; code updated for getting correct output  |
+| 2023-06-07        | 2.2     | Jeff Grossman     | add minor clarifications              |
+| 2023-05-17        | 2.1     | Nick Yi           | ID Review                             |
+| 2023-05-17        | 2.0     | Jeff Grossman     | add analytics content, simplify solutions, handle parsing glitches |
+| 2023-04-27        | 1.2     | Nick Yi           | QA Pass                               |
+| 2023-04-24        | 1.1     | Nick Yi           | ID Review                             |
+| 2023-02-14        | 1.0     | Jeff Grossman     | Create initial version of the project | --&gt;
+
+
+&lt;h3 align&#x3D;&quot;center&quot;&gt; &amp;#169; IBM Corporation. All rights reserved. &lt;h3/&gt;
+</textarea>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.6/iframeResizer.contentWindow.min.js"></script>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="stylesheet" href="./public/css/custom_plyr.css" />
+
+<script src="./editormd/examples/js/jquery.min.js"></script>
+<script src="./editormd/editormd.js"></script>
+
+<script src="./editormd/languages/en.js"></script>
+
+<script src="./public/js/common.js"></script>
+<script src="./public/js/render.js"></script>
+
+<script type="text/javascript">
+
+
+    var authorEditor = $(function () {
+        let metadata = he.decode('{&quot;markdown-version&quot;:&quot;v1&quot;,&quot;tool-type&quot;:&quot;theia&quot;,&quot;branch&quot;:&quot;lab-6092-instruction&quot;,&quot;version-history-start-date&quot;:&quot;2023-04-19T22:57:48Z&quot;}')
+        injectMetadata(metadata)
+
+        let token = findGetParameter("token");
+
+        let LABS_BASE_URL = 'https://labs.cognitiveclass.ai';
+        let asset_library_prefix_url = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork';
+        let tool_type = "theia";
+        let filename = `labs%2FM4_Practice_Project%2FM4_Practice_Project.md`;
+        let audio = JSON.parse(`{"url":"","isValid":false,"isOutdated":false}`)
+        let currentTheme = localStorage.getItem("theme") || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "default");
+
+        return authorEditor = editormd("test-editormd", "3.3.2", {
+
+            tool_type,
+            filename,
+            audio,
+
+            width: "100%",
+            //height: "100%",
+            autoHeight: true,
+
+            // mode: 'markdown',
+            theme: currentTheme,
+            previewTheme: currentTheme,
+            editorTheme: currentTheme === "dark" ? "pastel-on-dark" : "default",
+
+            readOnly: true,
+
+            pluginPath: 'plugins/',
+
+
+            syncScrolling: false,
+
+            htmlDecode: 'img',
+
+            path: 'editormd/lib/',
+            watch: false,
+
+            // markdown,
+            toolbar: false,
+
+            atLink: false,
+            toc: true,
+            tocm: true,
+            tocDropdown: false,
+            tocTitle: "Table of Contents For your lab!",
+
+            tex: true,
+            flowChart: true,
+            sequenceDiagram: true,
+            codeFold: true, // Doesn't do anything?
+            taskList: true,
+            emoji: true,
+
+            saveMarkdownToTextarea: true,
+
+            onresize: function () {
+                $("html,body").css("overflow", "hidden");
+
+                this.preview.css({
+                    width: $(window).width(),
+                    height: $(window).height()
+                })
+
+                adjustProgressBarWidth()
+            },
+            fixCodeBlocks: function () {
+                adjustCodeBlocks(this);
+            },
+            onload: function () {
+                $("[type=\"file\"]").bind("change", function () {
+                    alert($(this).val());
+                    authorEditor.cm.replaceSelection($(this).val());
+                    console.log($(this).val(), authorEditor);
+                });
+
+                this.fullscreen();
+                this.previewing();
+
+                setPreviewWatchToolbar(this);
+
+                if (tool_type != "instructional-lab") {
+                    fixCustomPlugins(this, 'https://reward.skills.network/claim');
+                }
+                else {
+                    addAudioWidget(this, audio);
+                }
+
+                setAssetLibraryPrefixUrl(asset_library_prefix_url);
+                //comms with UI
+                setParentUrl(LABS_BASE_URL);
+                establishCommsWithUI(this);
+                //let the UI know that the author-ide has loaded
+                requestToUI({ type: "frame_loaded" });
+            }
+        });
+    });
+</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+
+</html>
